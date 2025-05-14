@@ -1,0 +1,292 @@
+export interface BaseballCard {
+  id: string;                                   // Unique identifier (slug or UUID)
+  title: string;                                // Title (e.g., "Ken Griffey Jr. Rookie Card")
+  player: string;                               // Main featured player
+  images: string[];                             // Array of image paths/URLs (multiple angles)
+  year: number;                                 // Card's year of issue
+  brand: string;                                // Manufacturer (e.g., Topps, Upper Deck)
+  set?: string;                                 // Set/Series (optional, e.g., "Topps Chrome")
+  condition: 'Mint' | 'Near Mint' | 'Excellent' | 'Good' | 'Fair' | 'Poor' | string;
+  description: string;                          // Detailed description/story
+  cardNumber?: string;                          // Card number in set (optional)
+  price?: number;                               // Price in USD (optional, undefined = "inquire")
+  averageValue?: number;                        // Average market value in USD (optional)
+  available: boolean;                           // If card is available (unsold)
+  dateAdded: string;                            // ISO date (YYYY-MM-DD)
+  tags?: string[];                              // Keywords for search/filtering (team, position, rookie)
+}
+
+// Sample card data
+export const cards: BaseballCard[] = [
+  {
+    id: 'griffey-rc-1989-upperdeck',
+    title: 'Ken Griffey Jr. Rookie Card',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/griffey-rc-1989-upperdeck-1.jpg',
+      '/cards/griffey-rc-1989-upperdeck-2.jpg'
+    ],
+    year: 1989,
+    brand: 'Upper Deck',
+    set: 'Upper Deck (Rookie)',
+    condition: 'Near Mint',
+    description: "Iconic Ken Griffey Jr. rookie card. Vibrant colors, sharp corners - a centerpiece of any collection.",
+    cardNumber: "1",
+    price: 650,
+    averageValue: 600,
+    available: true,
+    dateAdded: '2024-05-01',
+    tags: ['rookie', 'Mariners', 'outfielder']
+  },
+  {
+    id: 'pete-rose-1964-topps-125',
+    title: 'Pete Rose 1964 Topps #125',
+    player: 'Pete Rose',
+    images: [
+      '/cards/pete-rose-1964-topps-125-front.jpg',
+      '/cards/pete-rose-1964-topps-125-back.jpg'
+    ],
+    year: 1964,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent',
+    description: "Pete Rose\'s 1964 Topps card (#125), his first solo Topps card, featuring the '1963 All-Star Rookie' trophy. A key card for any vintage collector.",
+    cardNumber: "125",
+    price: undefined, // Inquire for price
+    averageValue: 350,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Reds', '2nd base', 'All-Star Rookie', 'vintage', 'Charlie Hustle']
+  },
+  // {
+  //   id: 'mantle-1952-topps',
+  //   title: 'Mickey Mantle 1952 Topps',
+  //   player: 'Mickey Mantle',
+  //   images: ['/cards/mantle-1952-topps-1.jpg'],
+  //   year: 1952,
+  //   brand: 'Topps',
+  //   set: 'Topps',
+  //   condition: 'Good',
+  //   description: "The legendary 1952 Topps Mantle, the holy grail for collectors. This one shows some edge wear but remains highly attractive. Part of a permanent collection, display only.",
+  //   cardNumber: "311",
+  //   price: undefined,
+  //   averageValue: 150000,
+  //   available: true,
+  //   dateAdded: '2024-05-03',
+  //   tags: ['Yankees', 'vintage', 'HOF', 'display only']
+  // },
+  {
+    id: 'trout-2011-topps-update',
+    title: 'Mike Trout RC 2011 Topps Update',
+    player: 'Mike Trout',
+    images: ['/cards/trout-2011-topps-update-1.jpg'],
+    year: 2011,
+    brand: 'Topps',
+    set: 'Update',
+    condition: 'Mint',
+    description: "Stunning Mike Trout rookie, arguably the best player of his generation. Pack-fresh condition.",
+    cardNumber: "US175",
+    price: 425,
+    averageValue: 400,
+    available: false,
+    dateAdded: '2024-05-08',
+    tags: ['rookie', 'Angels', 'MVP']
+  },
+  {
+    id: 'nolan-ryan-1972-topps-595',
+    title: 'Nolan Ryan 1972 Topps #595',
+    player: 'Nolan Ryan',
+    images: [
+      '/cards/nolan-ryan-1972-topps-595-front.jpg',
+      '/cards/nolan-ryan-1972-topps-595-back.jpg'
+    ],
+    year: 1972,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent',
+    description: "Nolan Ryan\'s 1972 Topps card (#595), featuring him as a pitcher for the California Angels. The back includes his major and minor league pitching record up to 1971.",
+    cardNumber: "595",
+    price: undefined,
+    averageValue: 120,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Nolan Ryan', 'Angels', 'HOF', 'strikeout king', 'vintage', '1972']
+  },
+  {
+    id: 'michael-jordan-1993-topps-finest-refractor',
+    title: 'Michael Jordan 1993 Topps Finest Refractor #1',
+    player: 'Michael Jordan',
+    images: ['/cards/jordan-1993-finest-refractor.jpg'],
+    year: 1993,
+    brand: 'Topps Finest',
+    set: 'Finest Refractors',
+    condition: 'Mint',
+    description: 'Highly sought-after refractor of Michael Jordan during his baseball career.',
+    cardNumber: '1',
+    price: 2500,
+    averageValue: 2200,
+    available: true,
+    dateAdded: '2025-05-13',
+    tags: ['basketball', 'baseball', 'MLB', 'minor league', 'refractor', 'iconic']
+  },
+  {
+    id: 'nolan-ryan-1973-topps-220',
+    title: 'Nolan Ryan 1973 Topps #220',
+    player: 'Nolan Ryan',
+    images: [
+      '/cards/nolan-ryan-1973-topps-220-front.jpg',
+      '/cards/nolan-ryan-1973-topps-220-back.jpg'
+    ],
+    year: 1973,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent',
+    description: "Key 1973 Topps card of Hall of Famer Nolan Ryan, showcasing his time with the California Angels. The back details his impressive 1972 season statistics.",
+    cardNumber: "220",
+    price: undefined,
+    averageValue: 90,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['HOF', 'Angels', 'pitcher', 'strikeout leader']
+  },
+  {
+    id: 'ken-griffey-jr-1995-ud-amazing-greats-ag1',
+    title: 'Ken Griffey Jr. 1995 Upper Deck Amazing Greats',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/ken-griffy-jr-upper-deck-front.jpg',
+      '/cards/ken-griffy-jr-upper-deck-back.jpg'
+    ],
+    year: 1995,
+    brand: 'Upper Deck',
+    set: "Collector's Choice Special Edition - Amazing Greats",
+    condition: 'Near Mint',
+    description: "Ken Griffey Jr. \'Amazing Greats\' (AG1) insert from 1995 Upper Deck Collector\'s Choice Special Edition. Marked as \'One of 2,000\'.",
+    cardNumber: "AG1",
+    price: undefined,
+    averageValue: 75,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mariners', 'outfielder', 'insert', 'limited edition', '90s']
+  },
+  {
+    id: 'nolan-ryan-1971-topps-513',
+    title: 'Nolan Ryan 1971 Topps #513',
+    player: 'Nolan Ryan',
+    images: [
+      '/cards/nolan-ryan-topps-1971-513-front.jpg',
+      '/cards/nolan-ryan-topps-1971-back.jpg'
+    ],
+    year: 1971,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent',
+    description: "Nolan Ryan\'s 1971 Topps card (#513) from his time with the New York Mets. Features a classic Topps design and early career stats.",
+    cardNumber: "513",
+    price: undefined,
+    averageValue: 150,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mets', 'pitcher', 'HOF', 'vintage', '70s']
+  },
+  {
+    id: 'albert-pujols-2001-bowman-264',
+    title: 'Albert Pujols 2001 Bowman Rookie #264',
+    player: 'Albert Pujols',
+    images: [
+      '/cards/albert-pujols-2001-bowman-rookie-264-front.jpg',
+      '/cards/albert-pujols-2001-bowman-rookie-264-back.jpg'
+    ],
+    year: 2001,
+    brand: 'Bowman',
+    set: 'Bowman',
+    condition: 'Near Mint',
+    description: "Albert Pujols\' 2001 Bowman rookie card (#264). Highlights his MVP performance in the 2000 Midwest League and Pacific Coast League playoffs. Notes his complete hitting package, plate discipline, and defensive skills.",
+    cardNumber: "264",
+    price: undefined,
+    averageValue: 150,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['rookie', 'Cardinals', '3B', 'MVP', 'HOF']
+  },
+  {
+    id: 'mark-mcgwire-1987-donruss-rr-46',
+    title: 'Mark McGwire 1987 Donruss Rated Rookie #46',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1987-donruss-rated-rookie-46-front.jpg',
+      '/cards/mark-mcgwire-1987-donruss-rated-rookie-46-back.jpg'
+    ],
+    year: 1987,
+    brand: 'Donruss',
+    set: 'Rated Rookie',
+    condition: 'Excellent', 
+    description: "Mark McGwire\'s 1987 Donruss Rated Rookie card (#46). Highlights his strong start with the A\'s, including 3 HRs in his first 7 major league hits. Notes his All-America status at USC and participation in the \'84 U.S. Olympic team.",
+    cardNumber: "46",
+    price: undefined,
+    averageValue: 25, 
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['rookie', 'A\'s', 'Athletics', '3B', 'Rated Rookie', 'slugger']
+  },
+  {
+    id: 'mark-mcgwire-1987-donruss-the-rookies-1',
+    title: 'Mark McGwire 1987 Donruss The Rookies #1',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1987-donruss-the-rookies-1-front.jpg',
+      '/cards/mark-mcgwire-1987-donruss-the-rookies-1-back.jpg'
+    ],
+    year: 1987,
+    brand: 'Donruss',
+    set: 'The Rookies',
+    condition: 'Excellent',
+    description: "Mark McGwire\'s 1987 Donruss The Rookies card (#1). Details his immediate impact as one of AL\'s top HR hitters after spring training, his All-America selection at Southern Cal, and role in the \'84 U.S. Olympic team.",
+    cardNumber: "1",
+    price: undefined,
+    averageValue: 20,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['rookie', 'A\'s', 'Athletics', '1B', 'The Rookies', 'slugger']
+  },
+  {
+    id: 'mark-mcgwire-1996-ud-power-package-pp10',
+    title: 'Mark McGwire 1996 Upper Deck Power Package #PP10',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1996-upper-deck-power-package-pp10-front.jpg',
+      '/cards/mark-mcgwire-1996-upper-deck-power-package-pp10-back.jpg'
+    ],
+    year: 1996,
+    brand: 'Upper Deck',
+    set: 'Power Package',
+    condition: 'Near Mint',
+    description: "Mark McGwire\'s 1996 Upper Deck Power Package insert card (#PP10). Highlights his record-setting at-bats-to-homers ratio in \'95 and his impressive 38 homers in 275 at-bats by the end of July \'96 (a homer every 7.2 at-bats).",
+    cardNumber: "PP10",
+    price: undefined,
+    averageValue: 10,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['A\'s', 'Athletics', '1B', 'insert', 'Power Package', 'slugger', '90s']
+  },
+  {
+    id: 'troy-glaus-1998-upper-deck-al-debut',
+    title: 'Troy Glaus 1998 Upper Deck AL Debut',
+    player: 'Troy Glaus',
+    images: [
+      '/cards/troy-glaus-1998-upper-deck-al-debut-front.jpg',
+      '/cards/troy-glaus-1998-upper-deck-al-debut-back.jpg'
+    ],
+    year: 1998,
+    brand: 'Upper Deck',
+    set: 'AL Debut',
+    condition: 'Near Mint',
+    description: "Third baseman Troy Glaus, the Anaheim Angels\' No. 1 draft pick in 1997, made his Major League debut for the Angels on July 31, 1998. He started at third and hit an RBI double off Bret Saberhagen in his first at-bat. Glaus was called up after a stellar minor-league season, leading all of minor-league ball with 35 homers at the time of his promotion.",
+    cardNumber: undefined, // Or specific number if known
+    price: undefined,
+    averageValue: 5,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Angels', 'third base', 'rookie', 'debut', '90s', 'Upper Deck']
+  }
+];

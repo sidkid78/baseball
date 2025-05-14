@@ -1,0 +1,46 @@
+2025-05-13 22:03:35,335 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:03:35,363 - __main__ - INFO - Successfully read file: instructions.md
+2025-05-13 22:03:35,364 - __main__ - INFO - Successfully read file: frontend/src/app/layout.tsx
+2025-05-13 22:03:40,504 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:15:34,202 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:15:34,209 - __main__ - INFO - Successfully read file: frontend/src/data/cards.ts
+2025-05-13 22:15:43,050 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:15:43,058 - __main__ - INFO - Successfully edited/created file: frontend/src/data/cards.ts
+2025-05-13 22:15:43,723 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:15:43,729 - __main__ - ERROR - Error reading file frontend/src/data/cards.ts due to encoding issue: 'utf-8' codec can't decode byte 0x96 in position 1745: invalid start byte. Attempting fallback.
+2025-05-13 22:15:45,074 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:15:45,080 - __main__ - ERROR - Error reading file frontend/src/data/cards.ts due to encoding issue: 'utf-8' codec can't decode byte 0x96 in position 1745: invalid start byte. Attempting fallback.
+2025-05-13 22:15:46,953 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:28:01,983 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:28:01,990 - __main__ - INFO - Successfully read file: frontend/src/data/cards.ts
+2025-05-13 22:28:09,503 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:28:09,505 - __main__ - INFO - Successfully edited/created file: frontend/src/data/cards.ts
+2025-05-13 22:28:10,046 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:28:10,048 - __main__ - INFO - Successfully read file: frontend/src/data/cards.ts
+2025-05-13 22:28:11,681 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:22,203 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:22,214 - __main__ - INFO - Successfully read file: instructions.md
+2025-05-13 22:36:31,798 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:31,800 - __main__ - ERROR - Error editing file frontend/src/app/about/page.tsx: [Errno 2] No such file or directory: 'C:\\Users\\sidki\\source\\repos\\baseball_cards\\frontend/src/app/about/page.tsx'
+2025-05-13 22:36:31,800 - __main__ - INFO - Successfully read file: frontend/src/components/navbar.tsx
+2025-05-13 22:36:38,072 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:38,088 - __main__ - INFO - Executed bash command: mkdir -p frontend/src/app/about
+2025-05-13 22:36:41,009 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:41,024 - __main__ - INFO - Executed bash command: mkdir frontend/src/app/about
+2025-05-13 22:36:49,131 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:36:49,133 - __main__ - ERROR - Error editing file frontend/src/app/about/page.tsx: [Errno 2] No such file or directory: 'C:\\Users\\sidki\\source\\repos\\baseball_cards\\frontend/src/app/about/page.tsx'
+2025-05-13 22:36:51,557 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:24,401 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:24,408 - __main__ - ERROR - Error editing file frontend/src/app/about/page.tsx: [Errno 2] No such file or directory: 'C:\\Users\\sidki\\source\\repos\\baseball_cards\\frontend/src/app/about/page.tsx'
+2025-05-13 22:43:24,408 - __main__ - INFO - Successfully read file: frontend/src/components/navbar.tsx
+2025-05-13 22:43:26,574 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:26,589 - __main__ - INFO - Executed bash command: mkdir -p frontend/src/app/about
+2025-05-13 22:43:28,594 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:28,609 - __main__ - INFO - Executed bash command: if not exist frontend\src mkdir frontend\src
+2025-05-13 22:43:28,624 - __main__ - INFO - Executed bash command: if not exist frontend\src\app mkdir frontend\src\app
+2025-05-13 22:43:28,641 - __main__ - INFO - Executed bash command: if not exist frontend\src\app\about mkdir frontend\src\app\about
+2025-05-13 22:43:29,469 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:29,471 - __main__ - INFO - Successfully edited/created file: frontend/src/app/about/page.tsx
+2025-05-13 22:43:36,541 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-05-13 22:43:36,543 - __main__ - INFO - Successfully edited/created file: frontend/src/components/navbar.tsx
+2025-05-13 22:43:37,874 - httpx - INFO - HTTP Request: POST https://kevin-m8961u8a-eastus2.cognitiveservices.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
