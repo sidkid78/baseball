@@ -1,24 +1,19 @@
+import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Script from 'next/script'; // Import Script component
+import Script from 'next/script';
 import { cards, BaseballCard } from '@/data/cards';
 import { CardImageZoom } from '@/components/card-image-zoom';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge'; // For displaying status
+import { Badge } from '@/components/ui/badge';
 
-type Props = {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-// Function to fetch card data (replace with actual data fetching if not using local file in future)
 async function getCard(id: string): Promise<BaseballCard | undefined> {
   return cards.find((card) => card.id === id);
 }
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: { params: { id: string } }
 ): Promise<Metadata> {
   const { id } = params;
   const card = await getCard(id);
@@ -32,7 +27,7 @@ export async function generateMetadata(
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const imageUrl = card.images && card.images.length > 0 
     ? card.images[0].startsWith('/') ? `${siteUrl}${card.images[0]}` : card.images[0]
-    : `${siteUrl}/placeholder-card-image.jpg`; // Fallback image
+    : `${siteUrl}/placeholder-card-image.jpg`;
 
   return {
     title: `${card.title} (${card.year} ${card.brand}) | Heritage Cardboard`,
@@ -44,12 +39,12 @@ export async function generateMetadata(
       images: [
         {
           url: imageUrl,
-          width: 800, // Consider actual image dimensions or common OG dimensions
+          width: 800,
           height: 600,
           alt: `${card.title} image`,
         },
       ],
-      type: 'website', // Reverted to 'website' to satisfy Next.js OG types
+      type: 'website',
       locale: 'en_US',
     },
     twitter: {
@@ -61,7 +56,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function CardDetailsPage({ params }: Props) {
+export default async function CardDetailsPage(
+  { params }: { params: { id: string } }
+) {
   const card = await getCard(params.id);
 
   if (!card) {
@@ -70,14 +67,13 @@ export default async function CardDetailsPage({ params }: Props) {
 
   const cardStatus = card.available ? 'Available' : 'Sold';
 
-  // Prepare JSON-LD structured data
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: card.title,
     image: card.images && card.images.length > 0 ? card.images[0].startsWith('/') ? `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}${card.images[0]}` : card.images[0] : `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/placeholder-card-image.jpg`,
     description: card.description,
-    sku: card.id, // Use card.id as a unique identifier
+    sku: card.id,
     brand: {
       '@type': 'Brand',
       name: card.brand,
@@ -93,7 +89,6 @@ export default async function CardDetailsPage({ params }: Props) {
         name: 'Heritage Cardboard',
       },
     },
-    // You can add more properties like condition, year, etc. as additionalProperty
     additionalProperty: [
       {
         '@type': 'PropertyValue',
@@ -110,7 +105,6 @@ export default async function CardDetailsPage({ params }: Props) {
 
   return (
     <>
-      {/* Add JSON-LD script to the head of the page */}
       <Script
         id={`card-structured-data-${card.id}`}
         type="application/ld+json"
@@ -194,7 +188,6 @@ export default async function CardDetailsPage({ params }: Props) {
               )}
             </div>
 
-            {/* Optional: Tags or other details */}
             {card.tags && card.tags.length > 0 && (
               <div className="pt-4">
                 <h3 className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-1">Tags:</h3>

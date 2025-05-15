@@ -59,7 +59,7 @@ export function NavBar() {
             ⚾
           </span>
           {/* Replace with your name/brand */}
-          <span>Heritage Cardboard</span>
+          <span>Dugout Treasures</span>
         </Link>
 
         {/* Desktop navigation */}

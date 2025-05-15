@@ -99,12 +99,13 @@ const filterAndSortCards = (
   return Sourcedata;
 };
 
-export default function CardsCatalogPage({ 
+export default async function CardsCatalogPage({ 
   searchParams 
 }: {
   searchParams: CardPageSearchParams // Use the defined interface
 }) {
-  const parsedFilters = parsePageSearchParams(searchParams);
+  const resolvedSearchParams = await searchParams;
+  const parsedFilters = parsePageSearchParams(resolvedSearchParams);
   const displayedCards = filterAndSortCards(allCardsData, parsedFilters);
 
   return (

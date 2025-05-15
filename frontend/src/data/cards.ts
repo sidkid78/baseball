@@ -210,24 +210,24 @@ export const cards: BaseballCard[] = [
     tags: ['rookie', 'Cardinals', '3B', 'MVP', 'HOF']
   },
   {
-    id: 'mark-mcgwire-1987-donruss-rr-46',
+    id: 'mark-mcgwire-1987-donruss-rated-rookie-46',
     title: 'Mark McGwire 1987 Donruss Rated Rookie #46',
     player: 'Mark McGwire',
     images: [
       '/cards/mark-mcgwire-1987-donruss-rated-rookie-46-front.jpg',
-      '/cards/mark-mcgwire-1987-donruss-rated-rookie-46-back.jpg'
+      // Add back image if available, e.g., '/cards/mark-mcgwire-1987-donruss-rated-rookie-46-back.jpg'
     ],
     year: 1987,
     brand: 'Donruss',
     set: 'Rated Rookie',
-    condition: 'Excellent', 
-    description: "Mark McGwire\'s 1987 Donruss Rated Rookie card (#46). Highlights his strong start with the A\'s, including 3 HRs in his first 7 major league hits. Notes his All-America status at USC and participation in the \'84 U.S. Olympic team.",
+    condition: 'Near Mint', // Placeholder
+    description: "Mark McGwire's iconic 1987 Donruss Rated Rookie card (#46), a staple for collectors of 1980s baseball cards. Features McGwire as a promising rookie with the Oakland Athletics.",
     cardNumber: "46",
-    price: undefined,
-    averageValue: 25, 
+    price: undefined, // Inquire for price
+    averageValue: 25, // Placeholder, research current value
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
-    tags: ['rookie', 'A\'s', 'Athletics', '3B', 'Rated Rookie', 'slugger']
+    tags: ['Athletics', 'rookie', 'Rated Rookie', 'Donruss', 'slugger', '80s']
   },
   {
     id: 'mark-mcgwire-1987-donruss-the-rookies-1',
@@ -235,22 +235,22 @@ export const cards: BaseballCard[] = [
     player: 'Mark McGwire',
     images: [
       '/cards/mark-mcgwire-1987-donruss-the-rookies-1-front.jpg',
-      '/cards/mark-mcgwire-1987-donruss-the-rookies-1-back.jpg'
+      // Add back image if available
     ],
     year: 1987,
     brand: 'Donruss',
     set: 'The Rookies',
-    condition: 'Excellent',
-    description: "Mark McGwire\'s 1987 Donruss The Rookies card (#1). Details his immediate impact as one of AL\'s top HR hitters after spring training, his All-America selection at Southern Cal, and role in the \'84 U.S. Olympic team.",
+    condition: 'Near Mint', // Placeholder
+    description: "Mark McGwire's card (#1) from the 1987 Donruss 'The Rookies' boxed set, showcasing him early in his impactful career with the Oakland Athletics.",
     cardNumber: "1",
-    price: undefined,
-    averageValue: 20,
+    price: undefined, // Inquire for price
+    averageValue: 15, // Placeholder
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
-    tags: ['rookie', 'A\'s', 'Athletics', '1B', 'The Rookies', 'slugger']
+    tags: ['Athletics', 'rookie', 'The Rookies', 'Donruss', 'boxed set', '80s']
   },
   {
-    id: 'mark-mcgwire-1996-ud-power-package-pp10',
+    id: 'mark-mcgwire-1996-upper-deck-power-package-pp10',
     title: 'Mark McGwire 1996 Upper Deck Power Package #PP10',
     player: 'Mark McGwire',
     images: [
@@ -260,14 +260,34 @@ export const cards: BaseballCard[] = [
     year: 1996,
     brand: 'Upper Deck',
     set: 'Power Package',
-    condition: 'Near Mint',
-    description: "Mark McGwire\'s 1996 Upper Deck Power Package insert card (#PP10). Highlights his record-setting at-bats-to-homers ratio in \'95 and his impressive 38 homers in 275 at-bats by the end of July \'96 (a homer every 7.2 at-bats).",
+    condition: 'Excellent', // Placeholder
+    description: "Mark McGwire 'Power Package' die-cut insert card (#PP10) from 1996 Upper Deck. The back highlights his impressive home run and RBI statistics, noting him as a perennial All-Star.",
     cardNumber: "PP10",
-    price: undefined,
-    averageValue: 10,
+    price: undefined, // Inquire for price
+    averageValue: 8, // Placeholder
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
-    tags: ['A\'s', 'Athletics', '1B', 'insert', 'Power Package', 'slugger', '90s']
+    tags: ['Athletics', 'insert', 'die-cut', 'Upper Deck', '90s', 'slugger']
+  },
+  {
+    id: 'mark-mcgwire-1997-pacific-crown-collection-gc15',
+    title: 'Mark McGwire 1997 Pacific Crown Collection Gold Crown Die-Cuts #GC15',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1997-pacific-crown-collection-gc15-front.jpg', // You'll need to add this image
+      '/cards/mark-mcgwire-1997-pacific-crown-collection-gc15-back.jpg'   // And this image
+    ],
+    year: 1997,
+    brand: 'Pacific',
+    set: 'Crown Collection Gold Crown Die-Cuts',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Mark McGwire Gold Crown Die-Cuts insert (#GC15) from the 1997 Pacific Crown Collection. The back notes: 'Last season, Mark McGwire powered 52 homers, recording his seventh consecutive season of at least 30 long balls. He also led the majors with a .730 slugging percentage in 1996.'",
+    cardNumber: "GC15",
+    price: undefined, // Inquire for price
+    averageValue: 10, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Athletics', 'insert', 'die-cut', 'Pacific', 'Crown Collection', '90s', 'slugger']
   },
   {
     id: 'troy-glaus-1998-upper-deck-al-debut',
@@ -288,5 +308,45 @@ export const cards: BaseballCard[] = [
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Angels', 'third base', 'rookie', 'debut', '90s', 'Upper Deck']
+  },
+  {
+    id: 'rickey-henderson-1991-leaf-gold-leaf-moments-bc26',
+    title: "Rickey Henderson - Baseball's All-Time Base King",
+    player: 'Rickey Henderson',
+    images: [
+      '/cards/rickey-henderson-1991-leaf-bc26-front.jpg', // You'll need to add this image
+      '/cards/rickey-henderson-1991-leaf-bc26-back.jpg'   // And this image
+    ],
+    year: 1991,
+    brand: 'Leaf',
+    set: 'Gold Leaf Moments',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "It had been an event that was inevitable, but the ravages of running, sliding and stealing had taken their toll on Rickey Henderson's body and his date with destiny had to be postponed a few times because of nagging injuries. Finally, though, on 5/1/91, Henderson made a headlong dash from second to third base in the fourth inning against his former team, the New York Yankees. The count was 1-0 and Henderson beat catcher Matt Nokes' throw. When he did, the Oakland Alameda Coliseum crowd went wild—none more enthusiastically than Henderson's mother, Bobbie, who had come to see her son eclipse Hall of Famer Lou Brock's all-time stolen base record of 938. Henderson quickly rose to his feet and held base No. 939 aloft as Brock joined him on the field. \"Lou Brock was a symbol of great basestealing,\" Henderson said, \"but today I am the greatest of all time.\"",
+    cardNumber: "BC26",
+    price: undefined, // Inquire for price
+    averageValue: 5, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Athletics', 'HOF', 'stolen base king', 'Leaf', 'Gold Leaf Moments', '90s', 'LF']
+  },
+  {
+    id: 'mark-mcgwire-1987-fleer-update-u76',
+    title: 'Mark McGwire 1987 Fleer Update #U-76',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1987-fleer-u76-front.jpg', // You'll need to add this image
+      '/cards/mark-mcgwire-1987-fleer-u76-back.jpg'   // And this image
+    ],
+    year: 1987,
+    brand: 'Fleer',
+    set: 'Fleer Update',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Mark McGwire's 1987 Fleer Update card (#U-76). The card shows his early career stats with Modesto, Huntsville, Tacoma, and his debut with the Oakland A's in 1986. The back also includes a hitter classification and spray chart.",
+    cardNumber: "U-76",
+    price: undefined, // Inquire for price
+    averageValue: 15, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Athletics', 'rookie', 'Fleer Update', 'Fleer', 'slugger', '80s', 'First Base']
   }
 ];
