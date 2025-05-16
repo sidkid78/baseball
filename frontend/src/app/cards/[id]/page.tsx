@@ -13,8 +13,9 @@ async function getCard(id: string): Promise<BaseballCard | undefined> {
 }
 
 export async function generateMetadata(
-  { params }: { params: { id: string } }
+  { params: paramsPromise }: { params: Promise<{ id: string }> }
 ): Promise<Metadata> {
+  const params = await paramsPromise;
   const { id } = params;
   const card = await getCard(id);
 
@@ -57,8 +58,9 @@ export async function generateMetadata(
 }
 
 export default async function CardDetailsPage(
-  { params }: { params: { id: string } }
+  { params: paramsPromise }: { params: Promise<{ id: string }> }
 ) {
+  const params = await paramsPromise;
   const card = await getCard(params.id);
 
   if (!card) {

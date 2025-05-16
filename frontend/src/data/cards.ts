@@ -348,5 +348,64 @@ export const cards: BaseballCard[] = [
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Athletics', 'rookie', 'Fleer Update', 'Fleer', 'slugger', '80s', 'First Base']
+  },
+  {
+    id: 'mark-mcgwire-1997-upper-deck-collectors-choice-all-star',
+    title: 'Mark McGwire 1997 Upper Deck Collector\'s Choice All-Star & Record Breaker Plaque',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1997-ud-collectors-choice-all-star-plaque.jpg' // Placeholder image path
+    ],
+    year: 1997, // Year of the card
+    brand: 'Upper Deck',
+    set: "Collector\'s Choice All-Star",
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Mark McGwire 1997 Upper Deck Collector\'s Choice All-Star card (First Base). The item includes a commemorative plaque for his record-breaking 62nd Home Run hit on September 8, 1998, at Busch Stadium, St. Louis, off pitcher Steve Trachsel.",
+    cardNumber: undefined, // Card number not visible on the front of this specific card
+    price: undefined, // Inquire for price
+    averageValue: undefined, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mark McGwire', 'All-Star', 'Upper Deck', "Collector\'s Choice", 'First Base', 'Athletics', 'Cardinals', 'record breaker', 'home run', 'plaque', '90s']
+  },
+  {
+    id: 'mark-mcgwire-1989-bowman-197',
+    title: 'Mark McGwire 1989 Bowman #197',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1989-bowman-197-front.jpg', // Placeholder for front image
+      '/cards/mark-mcgwire-1989-bowman-197-back.jpg'   // Placeholder for back image
+    ],
+    year: 1989,
+    brand: 'Bowman',
+    set: 'Bowman Baseball',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Mark McGwire\'s 1989 Bowman card (#197) featuring him with the Oakland Athletics. The back details his stats up to 1988 and personal information. Card includes a printed autograph on the front.",
+    cardNumber: "197",
+    price: undefined, // Inquire for price
+    averageValue: undefined, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mark McGwire', 'Athletics', 'Bowman', '1B', '80s', 'slugger', 'printed autograph']
+  },
+  {
+    id: 'derek-jeter-1997-topps-160',
+    title: 'Derek Jeter 1997 Topps #160',
+    player: 'Derek Jeter',
+    images: [
+      '/cards/derek-jeter-1997-topps-160-front.jpg', // Placeholder for front image
+      '/cards/derek-jeter-1997-topps-160-back.jpg'   // Placeholder for back image
+    ],
+    year: 1997,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Derek Jeter\'s 1997 Topps card (#160) as shortstop for the New York Yankees. The back includes his complete major and minor league batting record and a blurb about his 1995 ML debut and future prospects.",
+    cardNumber: "160",
+    price: undefined, // Inquire for price
+    averageValue: undefined, // Placeholder, research current value
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Derek Jeter', 'Yankees', 'Topps', 'shortstop', 'SS', '90s', 'HOF']
   }
 ];

@@ -100,12 +100,12 @@ const filterAndSortCards = (
 };
 
 export default async function CardsCatalogPage({ 
-  searchParams 
+  searchParams: searchParamsPromise 
 }: {
-  searchParams: CardPageSearchParams // Use the defined interface
+  searchParams: Promise<CardPageSearchParams> // searchParams is now a Promise
 }) {
-  const resolvedSearchParams = await searchParams;
-  const parsedFilters = parsePageSearchParams(resolvedSearchParams);
+  const searchParams = await searchParamsPromise; // Await the promise here
+  const parsedFilters = parsePageSearchParams(searchParams); // Use the resolved searchParams
   const displayedCards = filterAndSortCards(allCardsData, parsedFilters);
 
   return (

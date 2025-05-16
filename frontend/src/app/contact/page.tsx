@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,7 +18,7 @@ interface FormData {
   phone: string; // Honeypot field, should remain hidden
 }
 
-export default function ContactPage() {
+function ContactForm() {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -121,10 +121,10 @@ export default function ContactPage() {
     }
   };
 
-  const pageTitle = formData.cardName 
-    ? `Inquire about: ${formData.cardName}` 
+  const pageTitle = formData.cardName
+    ? `Inquire about: ${formData.cardName}`
     : 'Contact Us';
-  
+
   const initialMessage = formData.cardName && formData.cardId
     ? `I'm interested in the ${formData.cardName} (ID: ${formData.cardId}). Please provide more information or discuss purchase options.\n\n`
     : '';
@@ -240,5 +240,33 @@ export default function ContactPage() {
         </div>
       </form>
     </main>
+  );
+}
+
+// Basic loading fallback component
+function ContactLoading() {
+  return (
+    <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse">
+      <header className="mb-10">
+        <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
+      </header>
+      <div className="space-y-6">
+        <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/4"></div>
+        <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded"></div>
+        <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-1/4"></div>
+        <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded"></div>
+        <div className="h-20 bg-slate-200 dark:bg-slate-700 rounded"></div>
+        <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded w-1/3"></div>
+      </div>
+    </main>
+  );
+}
+
+// New default export for the page
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<ContactLoading />}>
+      <ContactForm />
+    </Suspense>
   );
 } 
