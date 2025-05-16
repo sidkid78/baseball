@@ -5,6 +5,7 @@ import "./globals.css";
 import { NavBar } from "@/components/navbar"; // Import NavBar
 import { NuqsAdapter } from 'nuqs/adapters/next/app'; // Import NuqsAdapter
 import { ThemeProvider } from "next-themes"; // Import ThemeProvider
+import { Analytics } from "@vercel/analytics/next";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({
             </footer>
           </NuqsAdapter>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

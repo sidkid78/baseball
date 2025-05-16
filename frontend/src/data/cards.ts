@@ -407,5 +407,261 @@ export const cards: BaseballCard[] = [
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Derek Jeter', 'Yankees', 'Topps', 'shortstop', 'SS', '90s', 'HOF']
+  },
+  {
+    id: 'cal-ripken-jr-2000-topps-chrome-4',
+    title: 'Cal Ripken Jr. 2000 Topps Chrome #4',
+    player: 'Cal Ripken Jr.',
+    images: [
+      '/cards/cal-ripken-jr-2000-topps-chrome-4-front.jpg', // Placeholder for front image
+      '/cards/cal-ripken-jr-2000-topps-chrome-4-back.jpg'   // Placeholder for back image
+    ],
+    year: 2000,
+    brand: 'Topps Chrome',
+    set: 'Topps Chrome Baseball',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Cal Ripken Jr.\'s 2000 Topps Chrome card (#4) featuring the Iron Man with the Baltimore Orioles. The card highlights his durability and legendary status as a third baseman. The back provides his complete major league batting record up to the 1999 season.",
+    cardNumber: "4",
+    price: undefined, // Inquire for price
+    averageValue: 3.00, // Updated based on research for raw/NM condition
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Cal Ripken Jr.', 'Orioles', 'Topps Chrome', '3B', 'Third Base', 'HOF', 'Iron Man', 'refractor', '2000s']
+  },
+  {
+    id: 'jason-heyward-2010-bowman-platinum-91',
+    title: 'Jason Heyward 2010 Bowman Platinum #91 (RC)',
+    player: 'Jason Heyward',
+    images: [
+      '/cards/jason-heyward-2010-bowman-platinum-91-front.jpg', // Placeholder for front image
+      '/cards/jason-heyward-2010-bowman-platinum-91-back.jpg'   // Placeholder for back image
+    ],
+    year: 2010,
+    brand: 'Bowman Platinum',
+    set: 'Bowman Platinum',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Jason Heyward's rookie card (#91) from the 2010 Bowman Platinum set, featuring him with the Atlanta Braves. The back highlights his MLB debut on 4/5/10 where he hit a three-run homer. Card notes 'PLATINUM ASCENSION'.",
+    cardNumber: "91",
+    price: undefined, // Inquire for price
+    averageValue: 2.50, // Based on ungraded listings
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Jason Heyward', 'Braves', 'Bowman Platinum', 'rookie', 'RC', 'OF', 'outfielder', 'Platinum Ascension', '2010s']
+  },
+  {
+    id: 'mark-mcgwire-1989-fleer-world-series-8',
+    title: 'Mark McGwire 1989 Fleer 1988 World Series #8 - Game-Winning HR',
+    player: 'Mark McGwire',
+    images: [
+      '/cards/mark-mcgwire-1989-fleer-ws-8-front.jpg', // Placeholder for front image
+      '/cards/mark-mcgwire-1989-fleer-ws-8-back.jpg'   // Placeholder for back image
+    ],
+    year: 1989, // Copyright year of the card
+    brand: 'Fleer',
+    set: '1988 World Series Highlights', // Or similar subset name
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Commemorates Mark McGwire's game-winning home run for the Oakland A's in the 9th inning of Game 3 of the 1988 World Series against the Los Angeles Dodgers. Hit off relief pitcher Jay Howell, this was the second game-ending homer of that series. Card is #8 of 12 in the 'Game-Winning Home Run' subset.",
+    cardNumber: "8", // Part of a 12-card subset
+    price: undefined, // Inquire for price
+    averageValue: 1.50, // Based on ungraded listings
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mark McGwire', 'Athletics', 'Fleer', 'World Series', '1988 World Series', 'Game Winning Home Run', 'highlight', '80s', 'Dodgers', 'Jay Howell']
+  },
+  {
+    id: 'nick-johnson-2003-topps-chrome-bat-refractor-bbcr-nj',
+    title: 'Nick Johnson 2003 Topps Chrome Game-Used Bat Refractor #BBCR-NJ',
+    player: 'Nick Johnson',
+    images: [
+      '/cards/nick-johnson-2003-topps-chrome-bat-refractor-bbcr-nj-front.jpg', // Placeholder for front image
+      '/cards/nick-johnson-2003-topps-chrome-bat-refractor-bbcr-nj-back.jpg'   // Placeholder for back image
+    ],
+    year: 2003,
+    brand: 'Topps Chrome',
+    set: 'Topps Chrome Baseball',
+    condition: 'Excellent', // Placeholder, based on visual and eBay listing
+    description: "Nick Johnson's 2003 Topps Chrome Refractor card (#BBCR-NJ) featuring an authentic game-used bat piece. The card commemorates his debut achievement of being the only Yankee in 18 years to get two hits in his first MLB game (8/21/01).",
+    cardNumber: "BBCR-NJ",
+    price: undefined, // Inquire for price
+    averageValue: 15.00, // Conservative estimate for ungraded refractor with memorabilia
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Nick Johnson', 'Yankees', 'Topps Chrome', 'Game-Used Bat', 'Memorabilia', 'Refractor', '1B', 'First Base', '2000s']
+  },
+  {
+    id: 'mike-schmidt-1979-topps-610',
+    title: 'Mike Schmidt 1979 Topps #610',
+    player: 'Mike Schmidt',
+    images: [
+      '/cards/mike-schmidt-1979-topps-610-front.jpg', // Placeholder for front image
+      '/cards/mike-schmidt-1979-topps-610-back.jpg'   // Placeholder for back image
+    ],
+    year: 1979,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Mike Schmidt's 1979 Topps card (#610) featuring him with the Philadelphia Phillies. The back highlights several career achievements, including setting a record with 17 total bases in a 1976 game and tying a National League record with two grand slams in June 1973.",
+    cardNumber: "610",
+    price: undefined, // Inquire for price
+    averageValue: 33.00, // Estimate for ungraded card in good condition
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mike Schmidt', 'Phillies', 'Topps', '3B', 'Third Base', 'HOF', '70s', 'vintage']
+  },
+  {
+    id: 'mike-schmidt-1977-topps-140',
+    title: 'Mike Schmidt 1977 Topps #140',
+    player: 'Mike Schmidt',
+    images: [
+      '/cards/mike-schmidt-1977-topps-140-front.jpg', // Placeholder for front image
+      '/cards/mike-schmidt-1977-topps-140-back.jpg'   // Placeholder for back image
+    ],
+    year: 1977,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Mike Schmidt's 1977 Topps card (#140) with the Philadelphia Phillies. The back highlights his 1976 homer rampage: 'Mike went on a Homer rampage in April of 1976. He hit 4 Homers in one game at Wrigley Field, had stretch of 8 straight games with 9 Homers and walloped 11 round trippers in April to tie record.' Also features a Hank Aaron cartoon regarding his 17-game World Series hitting streak.",
+    cardNumber: "140",
+    price: undefined, // Inquire for price
+    averageValue: 30.00, // Estimate for a nice ungraded card
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Mike Schmidt', 'Phillies', 'Topps', '3B', 'Third Base', 'HOF', '70s', 'vintage', 'power hitter']
+  },
+  {
+    id: 'pete-rose-1966-topps-30',
+    title: 'Pete Rose 1966 Topps #30',
+    player: 'Pete Rose',
+    images: [
+      '/cards/pete-rose-1966-topps-30-front.jpg', // Placeholder for front image
+      '/cards/pete-rose-1966-topps-30-back.jpg'   // Placeholder for back image
+    ],
+    year: 1966,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Pete Rose\'s 1966 Topps card (#30) featuring him with the Cincinnati Reds as a 2nd baseman. The back notes: 'Hustling Pete is the spark plug of the Cincinnati infield. The 1965 campaign was Pete\'s most successful in the majors. He is truly one of the coming stars in the National League. Many experts pinpoint Pete\'s contribution to the high finish of the Reds in 1965 standings.' Card also mentions he was \'Rookie of the Year\' in 1963.",
+    cardNumber: "30",
+    price: undefined, // Inquire for price
+    averageValue: 45.00, // Estimate for a nice ungraded card in Excellent condition
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Pete Rose', 'Reds', 'Topps', '2B', 'Second Base', 'Charlie Hustle', 'Hit King', '60s', 'vintage']
+  },
+  {
+    id: 'steve-carlton-1969-topps-255',
+    title: 'Steve Carlton 1969 Topps #255',
+    player: 'Steve Carlton',
+    images: [
+      '/cards/steve-carlton-1969-topps-255-front.jpg', // Placeholder for front image
+      '/cards/steve-carlton-1969-topps-255-back.jpg'   // Placeholder for back image
+    ],
+    year: 1969,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Steve Carlton's 1969 Topps card (#255) featuring him as a pitcher for the St. Louis Cardinals. The back notes: 'A rangy southpaw, Steve backed up his rookie year with another fine season in 1968. The lefty escaped the sophomore jinx as he posted five shutouts and struck out 162 batters. One of his shutouts was a neat one-hitter, which he fired at the Chicago Cubs in June. Steve was the top lefty winner for St. Louis in 1967 and 1968.'",
+    cardNumber: "255",
+    price: undefined, // Inquire for price
+    averageValue: 20.00, // Estimate for a nice ungraded card in Excellent condition
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Steve Carlton', 'Cardinals', 'Topps', 'pitcher', 'P', 'HOF', 'Lefty', '60s', 'vintage']
+  },
+  {
+    id: 'chipper-jones-1992-donruss-rated-rookie-721',
+    title: 'Chipper Jones 1992 Donruss Rated Rookie #721',
+    player: 'Chipper Jones',
+    images: [
+      '/cards/chipper-jones-1992-donruss-rated-rookie-721-front.jpg', // Placeholder for front image
+      '/cards/chipper-jones-1992-donruss-rated-rookie-721-back.jpg'   // Placeholder for back image
+    ],
+    year: 1992,
+    brand: 'Donruss',
+    set: 'Donruss Rated Rookie (Series 2)',
+    condition: 'Near Mint', // Placeholder, assess actual condition
+    description: "Chipper Jones\' 1992 Donruss Rated Rookie card (#721, Series 2) as a shortstop for the Atlanta Braves. The back details his minor league stats from 1990-1992, birthdate (4/24/72), physical stats (6\'3\", 185 lbs), and notes he was the No. 1 June \'90 amateur draft pick with a contract through \'93. Card indicates \'NO MAJOR LEAGUE RECORD\'.",
+    cardNumber: "721",
+    price: undefined, // Inquire for price
+    averageValue: 6.00, // Based on ungraded listings
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Chipper Jones', 'Braves', 'Donruss', 'Rated Rookie', 'rookie', 'SS', 'shortstop', 'HOF', '90s']
+  },
+  {
+    id: 'steve-carlton-1974-topps-95',
+    title: 'Steve Carlton 1974 Topps #95',
+    player: 'Steve Carlton',
+    images: [
+      '/cards/steve-carlton-1974-topps-95-front.jpg', // Placeholder for front image
+      '/cards/steve-carlton-1974-topps-95-back.jpg'   // Placeholder for back image
+    ],
+    year: 1974,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Steve Carlton\'s 1974 Topps card (#95) with the Philadelphia Phillies. The back highlights his 1972 Cy Young season and a record 19 strikeouts in a 9-inning game in 1969. Also features a cartoon noting he once worked as a lifeguard.",
+    cardNumber: "95",
+    price: undefined, // Inquire for price
+    averageValue: 7.00, // Estimate for a nice ungraded card
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Steve Carlton', 'Phillies', 'Topps', 'pitcher', 'P', 'HOF', 'Lefty', '70s', 'vintage', 'Cy Young']
+  },
+  {
+    id: 'steve-carlton-1975-topps-185',
+    title: 'Steve Carlton 1975 Topps #185',
+    player: 'Steve Carlton',
+    images: [
+      '/cards/steve-carlton-1975-topps-185-front.jpg', // Placeholder for front image
+      '/cards/steve-carlton-1975-topps-185-back.jpg'   // Placeholder for back image
+    ],
+    year: 1975,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Steve Carlton\'s 1975 Topps card (#185) with the Philadelphia Phillies. The back details his Major League pitching record through 1974 and notes his achievement of being the 2nd N.L. hurler in history to top 300 K\'s in a season (1972). Also includes a baseball quiz: \'What is the record for most Homers in one month?\' (Answer: 18 by Rudy York).",
+    cardNumber: "185",
+    price: undefined, // Inquire for price
+    averageValue: 15.00, // Estimate for a nice ungraded card
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Steve Carlton', 'Phillies', 'Topps', 'pitcher', 'P', 'HOF', 'Lefty', '70s', 'vintage', 'strikeouts']
+  },
+  {
+    id: 'ken-griffey-jr-1990-topps-336',
+    title: 'Ken Griffey Jr. 1990 Topps #336 (All-Star Rookie)',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/ken-griffey-jr-1990-topps-336-front.jpg', // Placeholder for front image
+      '/cards/ken-griffey-jr-1990-topps-336-back.jpg'   // Placeholder for back image
+    ],
+    year: 1990,
+    brand: 'Topps',
+    set: 'Topps Baseball',
+    condition: 'Excellent', // Placeholder, assess actual condition
+    description: "Ken Griffey Jr.\'s 1990 Topps card (#336) featuring the \'Topps All-Star Rookie\' trophy. The back details his stats, biographical information (Born 11-21-69, Donora, PA), and notes: \'Ken graduated from Moeller (Cincinnati) High School in 1987. He played 3 years of football and 4 years of baseball. Was Baseball Player of the Year twice.\' Includes 1989 Monthly Scoreboard.",
+    cardNumber: "336",
+    price: undefined, // Inquire for price
+    averageValue: 3.00, // Estimate for a nice ungraded card
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Ken Griffey Jr.', 'Mariners', 'Topps', 'All-Star Rookie', 'OF', 'outfielder', 'HOF', '90s', 'The Kid']
   }
 ];
+
+// Helper function to generate a unique slug
+// export function generateSlug(parts: (string | number)[]): string {
+//   return parts
+//     .map(part => String(part).toLowerCase().replace(/[^a-z0-9\-]+/g, '-'))
+//     .join('-')
+//     .replace(/--+/g, '-') // Replace multiple hyphens with single
+//     .replace(/^-+|-+$/g, ''); // Trim leading/trailing hyphens
+// }
+
+// Example of updating an ID (if needed during development)
+// cards.forEach(card => {
+//   if (!card.id) { // Or some other condition to identify cards needing an ID update
+//     card.id = generateSlug([card.player, card.year, card.brand, card.set || 'base', card.cardNumber || 'NOCARDNO']);
+//   }
+// });
