@@ -2,6 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Script from 'next/script';
 import { cards, BaseballCard } from '@/data/cards';
 import { CardImageZoom } from '@/components/card-image-zoom';
@@ -152,7 +153,12 @@ export default async function CardDetailsPage(
               <div className="mt-3 grid grid-cols-4 gap-2">
                 {card.images.slice(1).map((img, i) => (
                   <div key={i} className="aspect-square rounded overflow-hidden border border-[rgba(201,168,76,0.15)]">
-                    <img src={img} alt={`${card.title} view ${i + 2}`} className="w-full h-full object-cover" />
+                    <Image 
+                      src={img} 
+                      alt={`${card.title} view ${i + 2}`} 
+                      fill
+                      className="object-cover" 
+                    />
                   </div>
                 ))}
               </div>

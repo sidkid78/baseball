@@ -2,7 +2,7 @@
 
 import { useQueryState } from 'nuqs';
 import { cards as allCardsData, BaseballCard } from '@/data/cards';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const CARD_CONDITIONS = [
   'Mint',
