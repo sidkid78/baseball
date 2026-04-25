@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Genesis of Charlie Hustle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-alt: #141311;
+      --text-main: #e8e3d8;
+      --text-muted: #8c887f;
+      --accent-red: #b93026;
+      --accent-gold: #cfaa60;
+      --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Playfair Display', serif;
+      overflow-x: hidden;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent-red);
+      color: #fff;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    .title-font {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .mono-font {
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* Custom Cursor */
+    #cursor-dot,
+    #cursor-outline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    #cursor-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-red);
+    }
+
+    #cursor-outline {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(232, 227, 216, 0.3);
+      transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+    }
+
+    body.hovering #cursor-outline {
+      width: 60px;
+      height: 60px;
+      background-color: rgba(185, 48, 38, 0.1);
+      border-color: var(--accent-red);
+    }
+
+    /* Noise Overlay */
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+    }
+
+    /* Layout Utilities */
+    .section {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Image Treatments */
+    .bg-image {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+      will-change: transform;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.9) 100%);
+      z-index: 2;
+    }
+
+    .img-reveal-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .img-reveal-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: url(#vintage-tone);
+      transition: filter 1s var(--ease-out-expo), transform 1.5s var(--ease-out-expo);
+    }
+
+    .img-reveal-wrapper:hover img {
+      filter: url(#none);
+      transform: scale(1.05);
+    }
+
+    /* Scroll Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* Specific Sections */
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: #fff;
+      mix-blend-mode: exclusion;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--accent-red);
+    }
+
+    .story-text {
+      font-size: clamp(1.25rem, 3vw, 2.5rem);
+      line-height: 1.5;
+      max-width: 900px;
+      margin: 0 auto;
+      color: var(--text-main);
+    }
+
+    .card-container {
+      perspective: 1000px;
+    }
+
+    .card-3d {
+      transition: transform 0.1s linear;
+      transform-style: preserve-3d;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(207, 170, 96, 0.2);
+    }
+
+    .details-list {
+      list-style: none;
+      border-top: 2px solid rgba(232, 227, 216, 0.1);
+    }
+
+    .details-list li {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(232, 227, 216, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      .details-list li {
+        flex-direction: row;
+        align-items: baseline;
+      }
+    }
+
+    .details-label {
+      width: 30%;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    .details-value {
+      width: 70%;
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .highlight-gold {
+      color: var(--accent-gold);
+    }
+
+    .cta-block {
+      text-align: center;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px dashed rgba(232, 227, 216, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG Filters -->
+  <svg style="display:none;">
+    <defs>
+      <!-- Film Grain / Noise -->
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.3 0" />
+      </filter>
+      <!-- Vintage Duotone / Distress -->
+      <filter id="vintage-tone">
+        <feColorMatrix type="matrix" values="
+        0.3 0.3 0.3 0 0.1
+        0.2 0.2 0.2 0 0.05
+        0.1 0.1 0.1 0 0.02
+        0 0 0 1 0" />
+        <feComponentTransfer>
+          <feFuncR type="linear" slope="1.2" intercept="-0.1" />
+          <feFuncG type="linear" slope="1.1" intercept="-0.05" />
+          <feFuncB type="linear" slope="0.9" intercept="0" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="noise-overlay" style="filter: url(#noise);"></div>
+
+  <!-- Custom Cursors -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <!-- HERO SECTION -->
+  <section class="section">
+    <div class="bg-image parallax" data-speed="0.3" style="background-image: url('./images/pete-1.jpg');"></div>
+    <div class="overlay"></div>
+    <div class="container">
+      <h1 class="hero-title reveal">
+        Before the<br>Controversy.
+        <span class="delay-1 reveal">Before the<br>Records.</span>
+        <span class="delay-2 reveal title-font" style="color: var(--accent-red); margin-top: 2rem;">There Was
+          Only<br>the Hustle.</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- STORY SECTION 1 -->
+  <section class="section" style="background-color: var(--bg-alt);">
+    <div class="bg-image parallax opacity-20" data-speed="0.1"
+      style="background-image: url('./images/pete-mood.jpg'); opacity: 0.15; filter: grayscale(100%);"></div>
+    <div class="container">
+      <div class="story-text reveal">
+        <p>It’s 1964. Baseball is played on natural grass, uniforms are made of flannel, and a young kid from Cincinnati
+          is sliding headfirst into second base, kicking up a cloud of dirt that will define a generation of the sport.
+        </p>
+        <br>
+        <p class="reveal delay-1"
+          style="color: var(--text-muted); font-size: 0.7em; font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em;">
+          This isn't just a piece of vintage cardboard. The 1964 Topps #125 is the Genesis of "Charlie Hustle."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ARTIFACT REVEAL -->
+  <section class="section">
+    <div class="container" style="display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;">
+      <div class="card-container reveal interactive-hover" style="max-width: 500px; margin: 0 auto; width: 100%;">
+        <img src="./images/pete-2.jpg" alt="1964 Pete Rose Card" class="card-3d"
+          style="width: 100%; height: auto; border: 10px solid #f0f0f0; border-radius: 4px;" id="hero-card">
+      </div>
+      <div class="reveal delay-2" style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 1.25rem; line-height: 1.8; color: var(--text-muted);">
+          While his 1963 rookie card forced him to share the spotlight with three other players, <em
+            style="color: var(--text-main);">this</em> is the card where Pete Rose finally stands alone. Emblazoned with
+          the iconic golden Topps '1963 All-Star Rookie' trophy cup, this card captures a 23-year-old Rose staring down
+          the barrel of a career that would shatter records and ignite decades of debate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FEELING -->
+  <section class="section" style="background-color: var(--bg-alt);">
+    <div class="container"
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;">
+      <div class="reveal">
+        <p style="font-size: 1.5rem; line-height: 1.6; margin-bottom: 2rem;">
+          When you hold this card, you aren’t just looking at the stats. You are holding the raw, unapologetic grit of
+          mid-century American baseball. You can almost hear the crack of the wooden bat; you can almost smell the
+          bubblegum dust it was packed in 60 years ago.
+        </p>
+        <h3 class="title-font reveal delay-1" style="font-size: 2.5rem; color: var(--accent-gold); line-height: 1.1;">
+          Modern cards are manufactured.<br>Cards like this were <span style="color: var(--text-main);">earned.</span>
+        </h3>
+      </div>
+      <div class="img-reveal-wrapper reveal delay-2 interactive-hover">
+        <img src="./images/pete-3.jpg" alt="Holding the history">
+      </div>
+    </div>
+  </section>
+
+  <!-- THE DETAILS & CTA -->
+  <section class="section" style="padding-top: 8rem; padding-bottom: 8rem;">
+    <div class="bg-image parallax" data-speed="0.2"
+      style="background-image: url('./images/pete-4.jpg'); filter: brightness(0.2) blur(4px);"></div>
+    <div class="container"
+      style="max-width: 800px; background: rgba(10,10,10,0.85); padding: 4rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);">
+      <h2 class="title-font reveal"
+        style="font-size: 1.5rem; margin-bottom: 3rem; color: var(--accent-red); letter-spacing: 0.1em;">The Artifact
+        Details</h2>
+
+      <ul class="details-list mono-font">
+        <li class="reveal delay-1">
+          <span class="details-label">The Legend</span>
+          <span class="details-value">Pete Rose ("Charlie Hustle")</span>
+        </li>
+        <li class="reveal delay-1">
+          <span class="details-label">The Year</span>
+          <span class="details-value">1964 (Topps Baseball)</span>
+        </li>
+        <li class="reveal delay-2">
+          <span class="details-label">The Milestone</span>
+          <span class="details-value highlight-gold">Rose’s First Solo Card (Card #125)</span>
+        </li>
+        <li class="reveal delay-2">
+          <span class="details-label">The Hallmark</span>
+          <span class="details-value">Features the legendary Topps All-Star Rookie Cup</span>
+        </li>
+        <li class="reveal delay-3">
+          <span class="details-label">The Condition</span>
+          <span class="details-value">Excellent — Preserved history.</span>
+        </li>
+      </ul>
+
+      <div class="cta-block reveal">
+        <p style="font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem;"
+          class="mono-font">
+          For the curator who understands that a collection is only as strong as its history, this Excellent-condition
+          artifact is a mandatory cornerstone.
+        </p>
+        <p style="font-size: 1.5rem; font-style: italic; color: var(--text-main); margin-top: 2rem;">
+          Custodians of the game: <span class="interactive-hover"
+            style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 2px;">Inquire
+            to secure</span> this piece of the 1964 diamond.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Custom Cursor Logic
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorOutline = document.getElementById('cursor-outline');
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    });
+
+    // Smooth follow for outline
+    function animateCursor() {
+      let dx = mouseX - outlineX;
+      let dy = mouseY - outlineY;
+      outlineX += dx * 0.15;
+      outlineY += dy * 0.15;
+      cursorOutline.style.left = `${outlineX}px`;
+      cursorOutline.style.top = `${outlineY}px`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover states
+    document.querySelectorAll('.interactive-hover, a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+    });
+
+    // Scroll Reveal Logic (Intersection Observer)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Parallax Logic
+    const parallaxElements = document.querySelectorAll('.parallax');
+    window.addEventListener('scroll', () => {
+      let scrolled = window.pageYOffset;
+      parallaxElements.forEach(el => {
+        let speed = el.getAttribute('data-speed');
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+
+    // 3D Card Tilt Effect
+    const cardContainer = document.querySelector('.card-container');
+    const card = document.getElementById('hero-card');
+
+    cardContainer.addEventListener('mousemove', (e) => {
+      const rect = cardContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left; // x position within the element.
+      const y = e.clientY - rect.top;  // y position within the element.
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg rotation
+      const rotateY = ((x - centerX) / centerX) * 15;
+
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+    });
+
+    cardContainer.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      card.style.transition = 'transform 0.5s var(--ease-out-expo)';
+    });
+
+    cardContainer.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s linear';
+    });
+  </script>
+</body>
+
+</html>

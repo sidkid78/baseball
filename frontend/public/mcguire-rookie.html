@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Summer of '87</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+    :root {
+      --c-black: #0a0a0a;
+      --c-gold: #d4af37;
+      --c-gold-dim: rgba(212, 175, 55, 0.3);
+      --c-rr-blue: #00a8e8;
+      --c-cream: #f4f1ea;
+      --f-hero: 'Bebas Neue', sans-serif;
+      --f-body: 'PT Serif', serif;
+      --panel-w: 100vw;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      background-color: var(--c-black);
+      color: var(--c-cream);
+      font-family: var(--f-body);
+      overflow: hidden;
+      cursor: none;
+    }
+
+    /* Custom Cursor */
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background-color: var(--c-gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s;
+      mix-blend-mode: difference;
+    }
+
+    #cursor.hovered {
+      width: 40px;
+      height: 40px;
+      background-color: var(--c-rr-blue);
+    }
+
+    /* SVG Filters Overlay */
+    #svg-filters {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.15;
+      mix-blend-mode: screen;
+    }
+
+    /* Carousel Structure */
+    .carousel-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari */
+    }
+
+    .panel {
+      flex: 0 0 var(--panel-w);
+      width: var(--panel-w);
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Typography Hierarchy */
+    h1,
+    h2,
+    .hero-text {
+      font-family: var(--f-hero);
+      text-transform: uppercase;
+      line-height: 0.85;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .body-text {
+      font-family: var(--f-body);
+      font-size: clamp(1rem, 1.2vw, 1.5rem);
+      line-height: 1.6;
+      max-width: 45ch;
+    }
+
+    .label {
+      font-family: var(--f-hero);
+      color: var(--c-gold);
+      letter-spacing: 0.2em;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    /* Animation Utilities */
+    .reveal-wrap {
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .reveal-text {
+      transform: translateY(110%);
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .panel.is-visible .reveal-text {
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .panel.is-visible .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Panel Specific Designs --- */
+
+    /* Panel 1: The Hook */
+    .p1-layout {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .p1-img-col {
+      width: 50%;
+      height: 100%;
+      position: relative;
+    }
+
+    .p1-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(1.2);
+    }
+
+    .p1-text-col {
+      width: 50%;
+      padding: 6vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .p1-headline {
+      font-size: clamp(4rem, 8vw, 10rem);
+      color: var(--c-gold);
+      margin-bottom: 2rem;
+    }
+
+    .p1-border {
+      position: absolute;
+      top: 2vw;
+      bottom: 2vw;
+      right: 2vw;
+      left: -2vw;
+      border: 2px solid var(--c-gold-dim);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Panel 2: The Legend */
+    .p2-layout {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .p2-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('./images/mark-1987-2.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(80%) brightness(0.4) contrast(1.5);
+      transition: transform 10s linear;
+    }
+
+    .panel.is-visible .p2-bg {
+      transform: scale(1.05);
+    }
+
+    .p2-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10vw;
+    }
+
+    .p2-giant-num {
+      position: absolute;
+      right: -5vw;
+      bottom: -10vh;
+      font-family: var(--f-hero);
+      font-size: 80vh;
+      color: rgba(255, 255, 255, 0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .p2-highlight {
+      color: var(--c-rr-blue);
+      font-style: italic;
+    }
+
+    /* Panel 3: The Nostalgia */
+    .p3-layout {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 4vw;
+      align-items: center;
+    }
+
+    .p3-img-container {
+      width: 80%;
+      height: 50vh;
+      margin-top: 4vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .p3-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    .p3-text-box {
+      margin-top: -5vh;
+      background: var(--c-black);
+      padding: 3rem;
+      border: 1px solid var(--c-gold);
+      z-index: 10;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .gold-text {
+      color: var(--c-gold);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Panel 4: The Artifact */
+    .p4-layout {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      background-color: #050505;
+    }
+
+    .p4-left {
+      width: 45%;
+      height: 100%;
+      padding: 5vw;
+      display: flex;
+      align-items: center;
+    }
+
+    .p4-img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+    }
+
+    .p4-right {
+      width: 55%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5vw 10vw 5vw 0;
+    }
+
+    .artifact-list {
+      list-style: none;
+      border-top: 1px solid var(--c-gold-dim);
+    }
+
+    .artifact-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--c-gold-dim);
+      display: flex;
+      align-items: baseline;
+    }
+
+    .item-label {
+      width: 120px;
+      font-family: var(--f-hero);
+      color: var(--c-gold);
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+    }
+
+    .item-value {
+      font-family: var(--f-body);
+      font-size: 1.2rem;
+    }
+
+    /* Panel 5: CTA */
+    .p5-layout {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .p5-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('./images/mcgwire-mood.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      mix-blend-mode: luminosity;
+    }
+
+    .cta-block {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: var(--f-hero);
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--c-black);
+      background: var(--c-gold);
+      padding: 1rem 3rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.4s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--c-rr-blue);
+      transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: -1;
+    }
+
+    .cta-btn:hover {
+      color: var(--c-cream);
+      transform: scale(1.05);
+    }
+
+    .cta-btn:hover::before {
+      left: 0;
+    }
+
+    /* Progress Indicator */
+    .progress-wrap {
+      position: fixed;
+      bottom: 2vw;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 100;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-gold-dim);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .dot.active {
+      background: var(--c-gold);
+      transform: scale(1.5);
+    }
+
+    @media (max-width: 768px) {
+
+      .p1-layout,
+      .p4-layout {
+        flex-direction: column;
+      }
+
+      .p1-img-col,
+      .p1-text-col,
+      .p4-left,
+      .p4-right {
+        width: 100%;
+        height: 50%;
+      }
+
+      .p1-text-col {
+        padding: 8vw;
+      }
+
+      .p1-border {
+        display: none;
+      }
+
+      .p4-right {
+        padding: 5vw;
+      }
+
+      .p3-text-box {
+        padding: 1.5rem;
+        margin-top: -2vh;
+        width: 90%;
+      }
+
+      .artifact-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+
+  <!-- SVG Grain Overlay -->
+  <svg id="svg-filters">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch">
+        <animate attributeName="baseFrequency" values="0.7;0.8;0.7" dur="0.2s" repeatCount="indefinite" />
+      </feTurbulence>
+      <feColorMatrix type="matrix" values="1 0 0 0 0, 0 0.9 0 0 0, 0 0.8 0 0 0, 0 0 0 1 0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
+  <!-- Progress Indicator -->
+  <div class="progress-wrap">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- Main Scroller -->
+  <main class="carousel-container" id="scroll-container">
+
+    <!-- Panel 1: Hook -->
+    <section class="panel p1">
+      <div class="p1-layout">
+        <div class="p1-img-col fade-in delay-1">
+          <img src="./images/mark-1987-1.jpg" alt="Opening Wax Pack" class="p1-img">
+        </div>
+        <div class="p1-text-col">
+          <div class="p1-border"></div>
+          <div class="label fade-in">Headline</div>
+          <h1 class="p1-headline">
+            <span class="reveal-wrap"><span class="reveal-text inline-block">The Summer</span></span><br>
+            <span class="reveal-wrap"><span class="reveal-text inline-block delay-1">of '87,</span></span>
+          </h1>
+          <p class="body-text fade-in delay-3">
+            Encapsulated in Cardboard. <br><br>
+            If you were a kid in 1987, there was only one thing that mattered when you tore the wax wrapper off a pack
+            of Donruss: chasing the blue and white <span
+              style="color: var(--c-rr-blue); font-family: var(--f-hero); letter-spacing: 1px;">Rated Rookie</span>
+            logo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 2: The Legend -->
+    <section class="panel p2">
+      <div class="p2-layout">
+        <div class="p2-bg"></div>
+        <div class="p2-giant-num">46</div>
+        <div class="p2-content">
+          <div class="label fade-in">The Story</div>
+          <h2 class="hero-text" style="font-size: clamp(2.5rem, 5vw, 6rem); margin: 2rem 0;">
+            <span class="reveal-wrap"><span class="reveal-text inline-block">And no Rated Rookie</span></span><br>
+            <span class="reveal-wrap"><span class="reveal-text inline-block delay-1">mattered more than <span
+                  style="color: var(--c-gold)">#46.</span></span></span>
+          </h2>
+          <p class="body-text fade-in delay-2">
+            Before the controversies, before the records, there was just a 23-year-old kid in an Athletics uniform with
+            forearms like tree trunks, violently launching <span class="p2-highlight">49 home runs</span> into the
+            bleachers and redefining what power meant in baseball.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: Nostalgia -->
+    <section class="panel p3">
+      <div class="p3-layout">
+        <p class="body-text fade-in" style="text-align: center; max-width: 60ch;">
+          Pulling this card out of a pack in the back of your parents' station wagon made you the king of your
+          neighborhood.
+        </p>
+        <div class="p3-img-container fade-in delay-1">
+          <img src="./images/mark-1987-3.jpg" alt="Kid in Station Wagon" class="p3-img">
+        </div>
+        <div class="p3-text-box fade-in delay-2">
+          <p class="body-text">
+            For collectors, the 1987 Donruss set is notorious. Those slick, black-and-gold borders were incredibly
+            fragile, prone to chipping the second they saw daylight. Finding a Mark McGwire Rated Rookie in genuine
+            <span class="gold-text">Near Mint</span> condition today is like finding a time machine that actually works.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 4: The Artifact -->
+    <section class="panel p4">
+      <div class="p4-layout">
+        <div class="p4-left fade-in">
+          <img src="./images/mark-1987-5.jpg" alt="Slabbed Card" class="p4-img">
+        </div>
+        <div class="p4-right">
+          <div class="label fade-in" style="margin-bottom: 2rem;">The Artifact</div>
+          <ul class="artifact-list">
+            <li class="artifact-item fade-in delay-1">
+              <span class="item-label">Player</span>
+              <span class="item-value">Mark McGwire (The 49-HR Rookie Campaign)</span>
+            </li>
+            <li class="artifact-item fade-in delay-2">
+              <span class="item-label">Era</span>
+              <span class="item-value">1987 (The Golden Age of the "Junk Wax" Era)</span>
+            </li>
+            <li class="artifact-item fade-in delay-3">
+              <span class="item-label">Pedigree</span>
+              <span class="item-value">Donruss Rated Rookie (#46)</span>
+            </li>
+            <li class="artifact-item fade-in delay-4">
+              <span class="item-label">Condition</span>
+              <span class="item-value">Near Mint (Immaculate black borders, perfectly preserved)</span>
+            </li>
+            <li class="artifact-item fade-in" style="transition-delay: 0.5s;">
+              <span class="item-label">Investment</span>
+              <span class="item-value">$25 (Market Average)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 5: CTA -->
+    <section class="panel p5">
+      <div class="p5-layout">
+        <div class="p5-bg"></div>
+        <div class="cta-block">
+          <p class="body-text fade-in"
+            style="margin-bottom: 2rem; color: var(--c-cream); text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+            Your mom might have thrown out your original shoebox full of cards, but the memories survive.
+          </p>
+          <div class="fade-in delay-1">
+            <a href="#" class="cta-btn interactive-hover">
+              <span style="position: relative; z-index: 2;">Reclaim Your Rookie Year</span><br>
+              <span style="font-size: 0.4em; position: relative; z-index: 2; letter-spacing: 4px; opacity: 0.8;">Inquire
+                Now</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Custom Cursor Logic
+    const cursor = document.getElementById('cursor');
+    const interactives = document.querySelectorAll('.interactive-hover');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    interactives.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+
+    // Intersection Observer for Animations & Progress Dots
+    const panels = document.querySelectorAll('.panel');
+    const dots = document.querySelectorAll('.dot');
+    const container = document.getElementById('scroll-container');
+
+    const observerOptions = {
+      root: container,
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          // Update Dots
+          const index = Array.from(panels).indexOf(entry.target);
+          dots.forEach((dot, i) => {
+            if (i === index) dot.classList.add('active');
+            else dot.classList.remove('active');
+          });
+        }
+      });
+    }, observerOptions);
+
+    panels.forEach(panel => {
+      observer.observe(panel);
+    });
+  </script>
+</body>
+
+</html>

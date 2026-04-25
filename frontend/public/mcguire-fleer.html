@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before the Myth</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap');
+
+        :root {
+            --c-bg: #070908;
+            --c-green: #0a1f18;
+            --c-gold: #dfa629;
+            --c-cream: #f4efe3;
+            --c-cream-dim: rgba(244, 239, 227, 0.6);
+
+            --f-hero: 'Playfair Display', serif;
+            --f-body: 'Inter', sans-serif;
+            --f-label: 'Space Mono', monospace;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+            /* Custom cursor */
+        }
+
+        body {
+            background-color: var(--c-bg);
+            color: var(--c-cream);
+            font-family: var(--f-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* SVG Noise Overlay */
+        .noise-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+            mix-blend-mode: overlay;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background-color: var(--c-gold);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+        }
+
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--c-cream-dim);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s linear, width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+        }
+
+        a:hover~.cursor-dot,
+        button:hover~.cursor-dot {
+            width: 0;
+            height: 0;
+        }
+
+        a:hover~.cursor-ring,
+        button:hover~.cursor-ring {
+            width: 60px;
+            height: 60px;
+            border-color: var(--c-gold);
+            background: rgba(223, 166, 41, 0.1);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: var(--f-hero);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-hero {
+            font-size: clamp(4rem, 12vw, 10rem);
+            text-transform: uppercase;
+            color: var(--c-cream);
+        }
+
+        .text-hero span {
+            display: block;
+            line-height: 0.9;
+        }
+
+        .text-hero span.highlight {
+            color: var(--c-gold);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .text-body {
+            font-size: clamp(1.25rem, 2.5vw, 2rem);
+            font-weight: 300;
+            max-width: 32ch;
+            color: var(--c-cream-dim);
+        }
+
+        .text-body strong {
+            color: var(--c-cream);
+            font-weight: 500;
+        }
+
+        .text-label {
+            font-family: var(--f-label);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--c-gold);
+        }
+
+        /* Animation Utilities */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+        }
+
+        .reveal-up.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-fade {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .reveal-fade.in-view {
+            opacity: 1;
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* Layout Archetypes */
+        section {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vw;
+        }
+
+        /* Image treatments */
+        .img-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .img-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(7, 9, 8, 0.2) 0%, rgba(7, 9, 8, 0.9) 100%);
+        }
+
+        .img-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 3s var(--ease-out-expo);
+            filter: grayscale(80%) sepia(20%) hue-rotate(80deg) contrast(1.2);
+            opacity: 0.4;
+        }
+
+        section.in-view .img-bg {
+            transform: scale(1);
+        }
+
+        /* Specific Sections */
+        #s-hero {
+            justify-content: flex-end;
+            padding-bottom: 10vh;
+        }
+
+        #s-story-1 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            align-items: center;
+            background-color: var(--c-green);
+        }
+
+        @media (max-width: 768px) {
+            #s-story-1 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #s-artifact {
+            align-items: center;
+            text-align: center;
+        }
+
+        .artifact-card {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 3rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: rotateY(-10deg) rotateX(10deg);
+            transition: transform 1.5s var(--ease-out-expo);
+        }
+
+        #s-artifact.in-view .artifact-card {
+            transform: rotateY(0) rotateX(0);
+        }
+
+        #s-map {
+            position: relative;
+        }
+
+        .map-composition {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+        }
+
+        .map-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .map-layer.ai-mood {
+            mix-blend-mode: multiply;
+            opacity: 0.8;
+        }
+
+        .map-layer.spray-chart {
+            mix-blend-mode: screen;
+            opacity: 0.6;
+            filter: contrast(1.5) grayscale(1);
+        }
+
+        .map-text-box {
+            background: rgba(7, 9, 8, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 4rem;
+            border-left: 2px solid var(--c-gold);
+            max-width: 600px;
+            margin-left: auto;
+        }
+
+        #s-legacy {
+            background: var(--c-bg);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 5vw;
+        }
+
+        @media (max-width: 768px) {
+            #s-legacy {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Curator Notes */
+        .curator-notes {
+            border-top: 1px solid var(--c-cream-dim);
+            padding-top: 2rem;
+            font-family: var(--f-label);
+            font-size: 0.85rem;
+            color: var(--c-cream-dim);
+            text-transform: uppercase;
+        }
+
+        .curator-notes h3 {
+            color: var(--c-gold);
+            font-family: var(--f-label);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .curator-notes ul {
+            list-style: none;
+        }
+
+        .curator-notes li {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .curator-notes span.key {
+            color: var(--c-cream);
+            margin-bottom: 0.25rem;
+        }
+
+        /* CTA */
+        .cta-container {
+            margin-top: 4rem;
+        }
+
+        .btn-claim {
+            display: inline-flex;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: var(--c-gold);
+            color: var(--c-bg);
+            font-family: var(--f-label);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            transition: background 0.4s ease, transform 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-claim::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-claim:hover {
+            background: var(--c-cream);
+            transform: translateY(-4px);
+        }
+
+        .btn-claim:hover::after {
+            left: 100%;
+        }
+
+        /* Aesthetic details */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            background-size: 5vw 100%;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+
+        .section-num {
+            position: absolute;
+            top: 5vw;
+            left: 5vw;
+            font-family: var(--f-label);
+            font-size: 0.85rem;
+            color: var(--c-gold);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SVG Filters -->
+    <svg style="display: none;">
+        <defs>
+            <filter id="noise-filter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch">
+                    <animate attributeName="seed" from="0" to="100" dur="10s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.1 0" />
+            </filter>
+            <filter id="glitch-warp">
+                <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence">
+                    <animate attributeName="baseFrequency" values="0.01;0.03;0.01" dur="8s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R"
+                    yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- UI Elements -->
+    <div class="noise-layer" style="filter: url(#noise-filter);"></div>
+    <div class="grid-lines"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <main>
+        <!-- SECTION 1: HERO -->
+        <section id="s-hero" class="scroll-trigger">
+            <div class="img-wrap">
+                <img src="./images/mark-1.jpg" class="img-bg" alt="Mark McGwire Swing">
+            </div>
+            <div class="text-label reveal-up"></div>
+            <h1 class="text-hero">
+                <span class="reveal-up delay-1">Before the <span class="highlight">Myth.</span></span>
+                <span class="reveal-up delay-2">Before the <span class="highlight">Bash.</span></span>
+            </h1>
+        </section>
+
+        <!-- SECTION 2: THE STORY -->
+        <section id="s-story-1" class="scroll-trigger">
+            <div class="section-num"></div>
+            <div class="content-block reveal-up">
+                <p class="text-label mb-4" style="margin-bottom: 2rem;"></p>
+                <p class="text-body">
+                    Close your eyes and go back to the summer of 1987.
+                    <br><br>
+                    Before the record chases, before the controversy, there was just a 23-year-old rookie in
+                    <strong>Oakland green and gold</strong>, violently introducing himself to the world. That year, Mark
+                    McGwire didn’t just hit 49 home runs—he shattered the sky, fundamentally changing the geometry of
+                    the game.
+                </p>
+            </div>
+            <div class="img-container reveal-up delay-2" style="position: relative; height: 70vh; overflow: hidden;">
+                <img src="./images/mark-2.jpg" alt="Stadium sky shattered"
+                    style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%) contrast(1.2);">
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE ARTIFACT -->
+        <section id="s-artifact" class="scroll-trigger" style="background: var(--c-bg);">
+            <div class="section-num"></div>
+            <img src="./images/mark-3.jpg" alt="1987 Fleer Update Card" class="artifact-card reveal-up">
+            <p class="text-body reveal-up delay-1" style="max-width: 40ch; margin: 0 auto;">
+                This 1987 Fleer Update (#U-76) isn’t just a baseball card. It is an artifact from <strong>ground
+                    zero</strong> of the McGwire legend.
+            </p>
+        </section>
+
+        <!-- SECTION 4: THE MAP -->
+        <section id="s-map" class="scroll-trigger">
+            <div class="section-num" style="color: var(--c-cream);">03 // The Map</div>
+            <div class="map-composition reveal-fade">
+                <img src="./images/mcguire-mood.png" class="map-layer ai-mood" alt="Mood texture">
+                <img src="./images/mark-4.jpg" class="map-layer spray-chart" alt="Spray Chart Map">
+            </div>
+            <div class="map-text-box reveal-up delay-1">
+                <p class="text-body" style="font-size: clamp(1rem, 1.8vw, 1.5rem);">
+                    While other sets were printing standard headshots, Fleer was giving true baseball nerds something
+                    better. Turn this card over, and you’re looking at a piece of baseball history: his minor league
+                    ascent from Modesto to Tacoma, capped off with Fleer’s iconic, quirky "spray chart" and hitter
+                    classification. <strong>It’s a literal map of a young giant learning how to conquer the major
+                        leagues.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: LEGACY & CTA -->
+        <section id="s-legacy" class="scroll-trigger">
+            <div class="img-wrap">
+                <img src="./images/mark-5.jpg" class="img-bg" alt="Ash Bat in Dugout" style="opacity: 0.15;">
+            </div>
+
+            <div class="legacy-content" style="display: flex; flex-direction: column; justify-content: center;">
+                <p class="text-body reveal-up"
+                    style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-family: var(--f-hero); font-style: italic; line-height: 1.3; max-width: 25ch;">
+                    You aren’t just buying cardboard. You’re reclaiming a piece of the late-80s. You’re holding the
+                    crack of the ash bat, the roar of the Coliseum, and the exact moment a kid from California became a
+                    baseball titan.
+                </p>
+
+                <div class="cta-container reveal-up delay-2">
+                    <a href="#" class="btn-claim">[Claim Your Piece of '87 History - $15]</a>
+                </div>
+            </div>
+
+            <div class="curator-panel reveal-up delay-1" style="align-self: center;">
+                <div class="curator-notes">
+                    <h3>Curator's Notes:</h3>
+                    <ul>
+                        <li><span class="key">Era:</span> 1987 (The Historic 49-HR Rookie Season)</li>
+                        <li><span class="key">Artifact:</span> Fleer Update #U-76</li>
+                        <li><span class="key">Condition:</span> Excellent (Preserved history)</li>
+                        <li><span class="key">The Insider Detail:</span> Features the legendary 80s Fleer "Hitter Spray
+                            Chart" on the reverse.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorRing = document.querySelector('.cursor-ring');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        });
+
+        // Smooth follow for the ring
+        function renderCursor() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+            requestAnimationFrame(renderCursor);
+        }
+        renderCursor();
+
+        // Intersection Observer for Scrollytelling Reveals
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.25
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add class to the section to trigger child animations
+                    entry.target.classList.add('in-view');
+
+                    // Find inner reveal elements and trigger them
+                    const reveals = entry.target.querySelectorAll('.reveal-up, .reveal-fade');
+                    reveals.forEach(el => el.classList.add('in-view'));
+
+                    // Optional: Unobserve after revealing to run once
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-trigger').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>

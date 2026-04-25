@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1971 Nolan Ryan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;700&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e8e6e1;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            overscroll-behavior: none;
+        }
+
+        .noise-svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            mix-blend-mode: overlay;
+            opacity: 0.35;
+        }
+
+        main {
+            position: relative;
+        }
+
+        .panel {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+            transform: scale(1.05);
+            transition: transform 10s ease-out;
+        }
+
+        .panel.is-active .bg-img {
+            transform: scale(1);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 5, 5, 0.3) 0%, rgba(5, 5, 5, 0.85) 100%);
+            z-index: 2;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            padding: 5vw;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .label {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: clamp(0.7rem, 1vw, 0.9rem);
+            color: #c94b28;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            line-height: 1.1;
+            font-weight: 700;
+            max-width: 20ch;
+        }
+
+        .body-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.4;
+            max-width: 30ch;
+            color: #dfddd6;
+            margin-bottom: 1.5rem;
+        }
+
+        .specs-container {
+            font-family: 'Space Grotesk', sans-serif;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-left: 2px solid #c94b28;
+            max-width: 800px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .spec-item strong {
+            color: #c94b28;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .cta-container {
+            margin-top: 4rem;
+        }
+
+        .cta {
+            display: inline-block;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid #e8e6e1;
+            padding: 1.5rem 2rem;
+            color: #e8e6e1;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .cta:hover {
+            background: #e8e6e1;
+            color: #050505;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .reveal.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .d-1 {
+            transition-delay: 0.2s;
+        }
+
+        .d-2 {
+            transition-delay: 0.4s;
+        }
+
+        .d-3 {
+            transition-delay: 0.6s;
+        }
+
+        @media(min-width:768px) {
+            .spec-item {
+                flex-direction: row;
+                align-items: baseline;
+            }
+
+            .spec-item strong {
+                min-width: 180px;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body><svg class="noise-svg">
+        <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)" />
+    </svg><svg style="display:none;">
+        <filter id="warp">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="1" result="noise">
+                <animate attributeName="baseFrequency" values="0.01;0.015;0.01" dur="10s" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    <main>
+        <section class="panel"><img src="./images/nolan-1.jpg" class="bg-img" style="filter:url(#warp);">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="label reveal">**Headline:**</div>
+                <h1 class="hero reveal d-1">The Calm Before the Trade That Changed Baseball.</h1>
+            </div>
+        </section>
+        <section class="panel"><img src="./images/nolan-2.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="label reveal">**The Story:**</div>
+                <p class="body-text reveal d-1">It’s 1971. The New York Mets have a young, wild flamethrower from Texas
+                    in their bullpen, and they don't quite know what to do with him.</p>
+                <p class="body-text reveal d-2">Within months of this card being printed, they would trade him to the
+                    Angels for Jim Fregosi—arguably the worst trade in baseball history.</p>
+            </div>
+        </section>
+        <section class="panel"><img src="./images/nolan-3.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content">
+                <p class="body-text reveal">This 1971 Topps Nolan Ryan (#513) isn't just a piece of cardboard. It is an
+                    artifact of the exact moment before the "Ryan Express" became a baseball deity.</p>
+            </div>
+        </section>
+        <section class="panel"><img src="./images/nolan-4.jpg" class="bg-img">
+            <div class="overlay"></div>
+            <div class="content">
+                <p class="body-text reveal">For vintage collectors, the 1971 Topps set is the ultimate white whale. The
+                    unforgiving, jet-black borders of this set mean that almost every card printed was chipped, dinged,
+                    and worn down by time.</p>
+                <p class="body-text reveal d-1">Finding a '71 Ryan in "Excellent" condition means you aren't just
+                    holding early career stats—you are holding a survivor.</p>
+                <p class="body-text reveal d-2" style="color:#c94b28; font-style:italic;">Secure a pristine piece of
+                    baseball’s greatest "What If" story.</p>
+            </div>
+        </section>
+        <section class="panel"><img src="./images/nolan-1971-mood.png" class="bg-img"
+                style="opacity:0.65; object-position: center;">
+            <div class="overlay"
+                style="background: radial-gradient(ellipse at center, rgba(5,5,5,0.2) 0%, rgba(5,5,5,0.75) 100%);">
+            </div>
+            <div class="content">
+                <div class="specs-container reveal">
+                    <div class="label">**The Artifact Details:**</div>
+                    <div class="spec-item"><strong>* **Player:**</strong><span>Nolan Ryan (The pre-mythology Mets
+                            era)</span></div>
+                    <div class="spec-item"><strong>* **Year:**</strong><span>1971 (Iconic Black Border Set)</span></div>
+                    <div class="spec-item"><strong>* **Set:**</strong><span>Topps Baseball #513</span></div>
+                    <div class="spec-item"><strong>* **Condition:**</strong><span>Excellent (A rare grade for the
+                            notoriously fragile '71 borders)</span></div>
+                    <div class="spec-item"><strong>* **Market Avg:**</strong><span>$150</span></div>
+                </div>
+                <div class="cta-container reveal d-2"><a href="#" class="cta">[ ⚾ Claim Your Piece of History - Inquire
+                        or Purchase ]</a></div>
+            </div>
+        </section>
+    </main>
+    <script>const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-active'); const reveals = entry.target.querySelectorAll('.reveal'); reveals.forEach(r => r.classList.add('is-active')); } }); }, { threshold: 0.4 }); document.querySelectorAll('.panel').forEach(panel => observer.observe(panel));</script>
+</body>
+
+</html>

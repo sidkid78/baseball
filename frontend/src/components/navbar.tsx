@@ -3,123 +3,159 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useState } from "react";
-import { ThemeToggle } from "./theme-toggle";
+import { useState, useEffect } from "react";
 
-// You might have this util already via shadcn
-function NavLink({
-  href,
-  children,
-  isActive,
-}: {
-  href: string;
-  children: React.ReactNode;
-  isActive?: boolean;
-}) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "px-3 py-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 ring-offset-2 ring-blue-400",
-        isActive
-          ? "text-blue-700 bg-blue-100 dark:text-blue-300 dark:bg-blue-900"
-          : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700"
-      )}
-      aria-current={isActive ? "page" : undefined}
-    >
-      {children}
-    </Link>
-  );
-}
+const navLinks: { href: string; label: string }[] = [
+  { href: "/", label: "Home" },
+  { href: "/cards", label: "The Vault" },
+  { href: "/contact", label: "Inquire" },
+  { href: "/about", label: "About" },
+];
 
 export function NavBar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const navLinks: { href: string; label: string }[] = [
-    { href: "/", label: "Home" },
-    { href: "/cards", label: "Browse Cards" },
-    { href: "/contact", label: "Contact / Buy" },
-    { href: "/about", label: "About" }, // Added the About link
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="w-full sticky top-0 z-30 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+    <header
+      className={cn(
+        "w-full sticky top-0 z-40 transition-all duration-300",
+        scrolled
+          ? "bg-[rgba(10,9,6,0.92)] backdrop-blur-md border-b border-[rgba(201,168,76,0.2)] shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
+          : "bg-transparent border-b border-transparent"
+      )}
+    >
+      {/* Gold top line */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent opacity-40" />
+
       <nav
-        className="max-w-7xl mx-auto flex items-center justify-between px-4 h-16"
+        className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 h-16"
         aria-label="Main navigation"
       >
-        {/* Logo / Brand */}
-        <Link href="/" className="flex items-center font-extrabold text-lg text-blue-700 dark:text-blue-300 tracking-wide pr-2">
-          {/* You can put a logo img/svg instead */}
-          <span aria-label="Baseball Icon" className="mr-2 text-xl" role="img">
+        {/* ── Logo ─────────────────────────────────────── */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 group"
+          aria-label="Dugout Treasures — Home"
+        >
+          <span
+            className="text-2xl transition-transform duration-300 group-hover:scale-110"
+            role="img"
+            aria-label="Baseball"
+          >
             ⚾
           </span>
-          {/* Replace with your name/brand */}
-          <span>Dugout Treasures</span>
+          <div className="flex flex-col leading-none">
+            <span className="font-serif text-[#c9a84c] font-semibold text-base tracking-wide">
+              Dugout
+            </span>
+            <span className="text-[10px] tracking-[0.25em] uppercase text-[#7a6e58] font-medium">
+              Treasures
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop navigation */}
-        <div className="hidden md:flex space-x-2 items-center">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.href}
-              href={link.href}
-              isActive={
-                link.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(link.href)
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-          <ThemeToggle />
+        {/* ── Desktop nav ──────────────────────────────── */}
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200 nav-underline",
+                  isActive
+                    ? "text-[#c9a84c] active"
+                    : "text-[#9a8e72] hover:text-[#e0d9c4]"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          {/* CTA button */}
+          <Link
+            href="/contact"
+            className="ml-4 px-4 py-2 text-sm font-semibold rounded border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black transition-all duration-200 tracking-wide"
+          >
+            Make Offer
+          </Link>
         </div>
 
-        {/* Mobile menu */}
-        <div className="md:hidden flex items-center">
-          <ThemeToggle />
+        {/* ── Mobile menu ──────────────────────────────── */}
+        <div className="md:hidden">
           <DropdownMenu.Root open={open} onOpenChange={setOpen}>
             <DropdownMenu.Trigger asChild>
-              <Button
-                size="icon"
-                variant="ghost"
+              <button
                 aria-label="Open mobile menu"
-                className="focus-visible:ring-2 ml-2"
+                className="p-2 rounded text-[#9a8e72] hover:text-[#c9a84c] hover:bg-[rgba(201,168,76,0.1)] transition-colors"
               >
                 <HamburgerMenuIcon className="w-5 h-5" />
-              </Button>
+              </button>
             </DropdownMenu.Trigger>
+
             <DropdownMenu.Content
               align="end"
-              sideOffset={8}
-              className="min-w-[180px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded shadow-lg z-50 py-1"
+              sideOffset={12}
+              className="min-w-[200px] bg-[#141210] border border-[rgba(201,168,76,0.25)] rounded-lg shadow-2xl z-50 py-2 overflow-hidden"
             >
-              {navLinks.map((link) => (
-                <DropdownMenu.Item key={link.href} asChild>
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "block w-full text-left px-4 py-2 text-sm font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 ring-offset-2 ring-blue-400",
-                      (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
-                        ? "text-blue-700 bg-blue-100 dark:text-blue-300 dark:bg-blue-900"
-                        : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700"
-                    )}
-                    aria-current={
-                      (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
-                        ? "page"
-                        : undefined
-                    }
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </DropdownMenu.Item>
-              ))}
+              {/* Gold top accent */}
+              <div className="h-px mx-4 mb-2 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent opacity-50" />
+
+              {navLinks.map((link) => {
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
+
+                return (
+                  <DropdownMenu.Item key={link.href} asChild>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 w-full px-4 py-3 text-sm font-medium transition-colors",
+                        isActive
+                          ? "text-[#c9a84c] bg-[rgba(201,168,76,0.1)]"
+                          : "text-[#9a8e72] hover:text-[#e0d9c4] hover:bg-[rgba(255,255,255,0.04)]"
+                      )}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      {isActive && (
+                        <span className="w-1 h-1 rounded-full bg-[#c9a84c]" />
+                      )}
+                      {link.label}
+                    </Link>
+                  </DropdownMenu.Item>
+                );
+              })}
+
+              <div className="h-px mx-4 mt-2 mb-1 bg-[rgba(201,168,76,0.15)]" />
+              <DropdownMenu.Item asChild>
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center mx-3 my-1 px-4 py-2.5 text-sm font-semibold rounded border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c] hover:text-black transition-all"
+                >
+                  Make an Offer
+                </Link>
+              </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </div>
