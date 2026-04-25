@@ -120,10 +120,10 @@ export default async function CardDetailsPage(
 
       {/* ── MAIN CONTENT ───────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 py-12">
-        <article className="grid md:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16 items-start">
+        <article className="grid md:grid-cols-[1fr_1.1fr] gap-8 md:gap-12 lg:gap-16 items-start">
 
           {/* ── LEFT: Image ──────────────────────────────────────── */}
-          <div className="sticky top-24">
+          <div className="md:sticky md:top-24">
             {/* Status ribbon */}
             {!card.available && (
               <div className="mb-4 flex items-center justify-center py-2.5 rounded-lg bg-red-950/60 border border-red-800/40">
