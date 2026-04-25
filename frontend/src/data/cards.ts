@@ -647,6 +647,26 @@ export const cards: BaseballCard[] = [
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Ken Griffey Jr.', 'Mariners', 'Topps', 'All-Star Rookie', 'OF', 'outfielder', 'HOF', '90s', 'The Kid']
+  },
+  {
+    id: 'ken-griffey-jr-1995-pinnacle-museum-collection-128',
+    title: 'Ken Griffey Jr. 1995 Pinnacle Museum Collection #128',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/ken-griffey-jr-1995-pinnacle-museum-front.jpg',
+      '/cards/ken-griffey-jr-1995-pinnacle-museum-back.jpg'
+    ],
+    year: 1995,
+    brand: 'Pinnacle',
+    set: 'Museum Collection',
+    condition: 'Excellent',
+    description: "An iconic Ken Griffey Jr. card from the 1995 Pinnacle Museum Collection (#128), featuring 'The Kid' blowing a giant bubble with bubblegum. This 'Museum Collection' insert is highly prized for its unique photography and premium finish. The back details his record-breaking 1994 season where he hit 40 homers in a shortened season.",
+    cardNumber: "128",
+    price: 260,
+    averageValue: 260,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Ken Griffey Jr.', 'Mariners', 'Pinnacle', 'Museum Collection', 'bubblegum', '90s', 'slugger', 'OF']
   }
 ];
 
