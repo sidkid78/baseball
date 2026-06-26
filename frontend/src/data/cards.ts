@@ -52,7 +52,7 @@ export const cards: BaseballCard[] = [
     condition: 'Excellent',
     description: "Pete Rose\'s 1964 Topps card (#125), his first solo Topps card, featuring the '1963 All-Star Rookie' trophy. A key card for any vintage collector.",
     cardNumber: "125",
-    price: undefined, // Inquire for price
+    price: 468.33,
     averageValue: 350,
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
@@ -183,8 +183,8 @@ export const cards: BaseballCard[] = [
     condition: 'Excellent',
     description: "Nolan Ryan\'s 1971 Topps card (#513) from his time with the New York Mets. Features a classic Topps design and early career stats.",
     cardNumber: "513",
-    price: undefined,
-    averageValue: 150,
+    price: 160.29,
+    averageValue: 160.29,
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Mets', 'pitcher', 'HOF', 'vintage', '70s']
@@ -667,6 +667,44 @@ export const cards: BaseballCard[] = [
     available: true,
     dateAdded: new Date().toISOString().split('T')[0],
     tags: ['Ken Griffey Jr.', 'Mariners', 'Pinnacle', 'Museum Collection', 'bubblegum', '90s', 'slugger', 'OF']
+  },
+  {
+    id: 'ken-griffey-jr-1999-upper-deck-mvp-gold-script-190',
+    title: 'Ken Griffey Jr. 1999 Upper Deck MVP Gold Script #190',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/ken-griffey-jr-1999-upper-deck-mvp-gold-script-190-front.jpg'
+    ],
+    year: 1999,
+    brand: 'Upper Deck',
+    set: 'MVP Gold Script',
+    condition: 'Near Mint',
+    description: "Rare and highly collectible 1999 Upper Deck MVP Gold Script card (#190) of Ken Griffey Jr. Features a brilliant gold facsimile signature script emblazoned across the front of the card. The dynamic design showcases 'The Kid' holding the MVP trophy aloft in front of a stadium crowd. An exquisite addition for Mariners and Griffey collectors.",
+    cardNumber: "190",
+    price: 356.81,
+    averageValue: 356.81,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Ken Griffey Jr.', 'Mariners', 'Upper Deck', 'MVP', 'Gold Script', 'outfielder', '90s', 'insert']
+  },
+  {
+    id: 'ken-griffey-jr-1999-topps-chrome-refractor-224',
+    title: 'Ken Griffey Jr. 1999 Topps Chrome Refractor #224',
+    player: 'Ken Griffey Jr.',
+    images: [
+      '/cards/ken-griffey-jr-1999-topps-chrome-refractor-224-front.jpg'
+    ],
+    year: 1999,
+    brand: 'Topps Chrome',
+    set: 'Topps Chrome Refractor - League Leaders',
+    condition: 'Near Mint',
+    description: "Stunning 1999 Topps Chrome Refractor (#224) of Ken Griffey Jr. as the American League Home Run Leader. Part of the 'League Leaders' insert subset, this refractor showcases 'The Kid' mid-follow-through in his iconic Mariners uniform. The prismatic rainbow finish makes this one of the most visually striking cards of the late-90s Chrome era.",
+    cardNumber: "224",
+    price: 110.00,
+    averageValue: 110.00,
+    available: true,
+    dateAdded: new Date().toISOString().split('T')[0],
+    tags: ['Ken Griffey Jr.', 'Mariners', 'Topps Chrome', 'Refractor', 'League Leaders', 'Home Run Leader', '90s', 'OF', 'insert']
   }
 ];
 

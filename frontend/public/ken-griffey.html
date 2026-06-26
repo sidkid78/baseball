@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Kid | Museum Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --c-dark: #070a09;
+      --c-teal: #0c2321;
+      --c-light: #f1efe7;
+      --c-gold: #d4af37;
+      --c-pink: #e87a90;
+      --f-hero: 'Playfair Display', serif;
+      --f-body: 'DM Sans', sans-serif;
+      --ease: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: none;
+    }
+
+    body {
+      background-color: var(--c-dark);
+      color: var(--c-light);
+      font-family: var(--f-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--c-gold);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: width 0.3s var(--ease), height 0.3s var(--ease), background-color 0.3s var(--ease);
+      mix-blend-mode: difference;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.1s ease-out, width 0.3s var(--ease), height 0.3s var(--ease);
+    }
+
+    /* SVG Grain Overlay */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.3;
+      mix-blend-mode: overlay;
+    }
+
+    /* Background Image System */
+    .bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background-color: var(--c-dark);
+    }
+
+    .bg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 1.5s var(--ease), transform 4s linear;
+    }
+
+    .bg-layer.active {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+
+    .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(7, 10, 9, 0.2) 0%, rgba(7, 10, 9, 0.8) 80%, rgba(7, 10, 9, 1) 100%);
+    }
+
+    /* Scrollytelling Structure */
+    .scroll-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .step {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 10vh 5vw;
+    }
+
+    .step-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    .serif {
+      font-family: var(--f-hero);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .txt-reveal {
+      overflow: hidden;
+    }
+
+    .txt-reveal span {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      transition: transform 1.2s var(--ease), opacity 1.2s var(--ease);
+    }
+
+    .step.is-visible .txt-reveal span {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .t-hero {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .t-body {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      line-height: 1.6;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.2s var(--ease) 0.2s;
+    }
+
+    .step.is-visible .t-body {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+
+    .t-gold {
+      color: var(--c-gold);
+      font-style: italic;
+    }
+
+    .t-pink {
+      color: var(--c-pink);
+    }
+
+    /* Progress Line */
+    .progress-container {
+      position: fixed;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60vh;
+      width: 1px;
+      background: rgba(241, 239, 231, 0.1);
+      z-index: 50;
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .progress-container {
+        display: block;
+      }
+
+      .step {
+        padding: 10vh 15vw;
+      }
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--c-gold);
+      transition: height 0.5s ease-out;
+    }
+
+    .progress-dot {
+      position: absolute;
+      left: -3px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-dark);
+      border: 1px solid var(--c-gold);
+      transition: background 0.3s ease;
+    }
+
+    /* Section Specifics */
+    .s-intro .t-hero {
+      text-indent: -0.05em;
+    }
+
+    .s-artifact {
+      text-align: right;
+    }
+
+    .s-artifact .step-inner {
+      margin-right: 0;
+    }
+
+    /* Analysis List */
+    .analysis-wrapper {
+      margin-top: 4rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s var(--ease) 0.4s;
+    }
+
+    .step.is-visible .analysis-wrapper {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .analysis-title {
+      font-family: var(--f-body);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      color: var(--c-gold);
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 1rem;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .analysis-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .a-card {
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 1px solid rgba(241, 239, 231, 0.2);
+      transition: border-color 0.3s ease;
+    }
+
+    .a-card:hover {
+      border-color: var(--c-gold);
+    }
+
+    .a-card::before {
+      content: '*';
+      position: absolute;
+      left: -5px;
+      top: -5px;
+      color: var(--c-gold);
+      font-size: 1.5rem;
+      font-family: var(--f-hero);
+      background: var(--c-dark);
+      line-height: 1;
+    }
+
+    .a-card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: rgba(241, 239, 231, 0.8);
+    }
+
+    /* Mood Blend Overlay */
+    .mood-blend {
+      position: fixed;
+      inset: 0;
+      background-image: url('./images/ken-mood.jpg');
+      background-size: cover;
+      background-position: center;
+      mix-blend-mode: soft-light;
+      opacity: 0.15;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- SVG Filters -->
+  <svg style="display:none;">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.08 0" />
+    </filter>
+  </svg>
+  <div class="grain-overlay" style="backdrop-filter: url(#noiseFilter);"></div>
+
+  <!-- Background System -->
+  <div class="bg-container">
+    <div class="bg-layer active" data-index="0" style="background-image: url('./images/ken-1.jpg');"></div>
+    <div class="bg-layer" data-index="1" style="background-image: url('./images/ken-2.jpg');"></div>
+    <div class="bg-layer" data-index="2" style="background-image: url('./images/ken-3.jpg');"></div>
+    <div class="bg-layer" data-index="3" style="background-image: url('./images/ken-4.jpg');"></div>
+  </div>
+  <div class="mood-blend"></div>
+
+  <!-- Progress Indicator -->
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+    <div class="progress-dot" style="top: 0%;"></div>
+    <div class="progress-dot" style="top: 33.3%;"></div>
+    <div class="progress-dot" style="top: 66.6%;"></div>
+    <div class="progress-dot" style="top: 100%;"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="scroll-content">
+
+    <!-- Section 0: The Strike -->
+    <section class="step s-intro" data-index="0">
+      <div class="step-inner">
+        <h1 class="t-hero">
+          <div class="txt-reveal"><span>In the summer of <span class="t-gold">1994</span>,</span></div>
+          <div class="txt-reveal"><span>baseball broke our</span></div>
+          <div class="txt-reveal"><span>hearts with the strike.</span></div>
+        </h1>
+        <p class="t-body">
+          But before the lights went out, Ken Griffey Jr. gave us magic—40 home runs that had the world holding its
+          breath, waiting for history.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 1: The Bubblegum -->
+    <section class="step s-swagger" data-index="1">
+      <div class="step-inner">
+        <h2 class="t-hero">
+          <div class="txt-reveal"><span>Effortless,</span></div>
+          <div class="txt-reveal"><span>untouchable <span class="t-pink"
+                style="font-style:italic;">swagger.</span></span></div>
+        </h2>
+        <p class="t-body">
+          This 1995 Pinnacle Museum Collection piece (#128) isn’t just a baseball card; it’s a time machine back to the
+          moment 'The Kid' ruled the world. Look at the image: mid-game, blowing a massive bubble of gum. While the rest
+          of the league suffocated under the pressure of the era, Griffey was just out there playing a kid’s game.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: The Artifact -->
+    <section class="step s-artifact" data-index="2">
+      <div class="step-inner">
+        <h2 class="t-hero">
+          <div class="txt-reveal"><span>Minted for the</span></div>
+          <div class="txt-reveal"><span>serious <span class="t-gold">curator.</span></span></div>
+        </h2>
+        <p class="t-body">
+          True to its 'Museum Collection' pedigree, this card wasn't printed for the casual fan. With its deep,
+          archival-quality gloss and premium finish, it is a perfectly preserved artifact of the 90s—a reminder of the
+          sweetest swing in baseball history, and the kid who made us all fall in love with the game.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Analysis -->
+    <section class="step s-analysis" data-index="3">
+      <div class="step-inner">
+        <h2 class="t-hero">
+          <div class="txt-reveal"><span>An irreplaceable</span></div>
+          <div class="txt-reveal"><span>piece of <span class="t-gold">nostalgia.</span></span></div>
+        </h2>
+        <div class="analysis-wrapper">
+    </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Custom Cursor Logic
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+
+    // Smooth ring follow
+    function animateCursor() {
+      let distX = mouseX - ringX;
+      let distY = mouseY - ringY;
+      ringX = ringX + (distX * 0.15);
+      ringY = ringY + (distY * 0.15);
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover state for interactive elements
+    document.querySelectorAll('.a-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '60px';
+        ring.style.height = '60px';
+        ring.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '40px';
+        ring.style.height = '40px';
+        ring.style.backgroundColor = 'transparent';
+      });
+    });
+
+    // Scrollytelling Intersection Observer
+    const sections = document.querySelectorAll('.step');
+    const bgs = document.querySelectorAll('.bg-layer');
+    const progressBar = document.querySelector('.progress-bar');
+    const dots = document.querySelectorAll('.progress-dot');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute('data-index'));
+
+          // Trigger text reveal
+          entry.target.classList.add('is-visible');
+
+          // Crossfade backgrounds
+          bgs.forEach((bg, i) => {
+            if (i === index) {
+              bg.classList.add('active');
+            } else {
+              bg.classList.remove('active');
+            }
+          });
+
+          // Update Progress Bar
+          const progressPct = (index / (sections.length - 1)) * 100;
+          progressBar.style.height = `${progressPct}%`;
+
+          dots.forEach((dot, i) => {
+            if (i <= index) {
+              dot.style.background = 'var(--c-gold)';
+            } else {
+              dot.style.background = 'var(--c-dark)';
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Fallback reveal for first section on load
+    setTimeout(() => {
+      sections[0].classList.add('is-visible');
+    }, 100);
+
+  </script>
+</body>
+
+</html>

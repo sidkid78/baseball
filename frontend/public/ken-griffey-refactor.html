@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sweetest Swing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Rajdhani:wght@300;500;700&family=Teko:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --prismatic-1: #ff0055;
+      --prismatic-2: #00ffaa;
+      --prismatic-3: #0055ff;
+      --prismatic-4: #ffaa00;
+    }
+
+    body {
+      background-color: #05050a;
+      color: #e2e8f0;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-headline {
+      font-family: 'Teko', sans-serif;
+    }
+
+    .font-serif-display {
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Prismatic Text Effect */
+    .text-prismatic {
+      background: linear-gradient(90deg,
+          var(--prismatic-1),
+          var(--prismatic-2),
+          var(--prismatic-3),
+          var(--prismatic-4),
+          var(--prismatic-1));
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine-gradient 4s linear infinite;
+    }
+
+    @keyframes shine-gradient {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    /* Holographic Overlay for Card */
+    .holo-overlay {
+      background: linear-gradient(125deg,
+          rgba(255, 0, 85, 0.4) 0%,
+          rgba(0, 255, 170, 0.4) 25%,
+          rgba(0, 85, 255, 0.4) 50%,
+          rgba(255, 170, 0, 0.4) 75%,
+          rgba(255, 0, 85, 0.4) 100%);
+      background-size: 400% 400%;
+      mix-blend-mode: color-dodge;
+      animation: holo-pan 10s ease infinite;
+      pointer-events: none;
+    }
+
+    @keyframes holo-pan {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Glare effect */
+    .glare {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-20deg);
+      animation: glare-sweep 5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glare-sweep {
+      0% {
+        left: -100%;
+      }
+
+      20% {
+        left: 200%;
+      }
+
+      100% {
+        left: 200%;
+      }
+    }
+
+    /* SVG Noise */
+    .noise-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: overlay;
+    }
+
+    /* Card 3D tilt prep */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+
+    .card-container {
+      transition: transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    /* Custom borders */
+    .chrome-border {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen selection:bg-teal-500 selection:text-white relative">
+
+  <!-- SVG Filter for Grain/Noise -->
+  <svg class="hidden">
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.5 0" />
+    </filter>
+  </svg>
+  <div class="noise-bg" style="backdrop-filter: url(#grain);"></div>
+
+  <!-- Ambient Background -->
+  <div class="fixed inset-0 z-0">
+    <img src="./images/ref-1.jpg"
+      class="absolute inset-0 w-full h-full object-cover opacity-15 filter grayscale blur-md transform scale-105"
+      alt="Stadium Lights" />
+    <div class="absolute inset-0 bg-gradient-to-b from-[#05050a]/40 via-[#05050a]/90 to-[#05050a]"></div>
+    <div class="absolute inset-0 bg-[url('/images/griffey-refractor-holo-texture.png')] bg-cover opacity-5 mix-blend-color-dodge mix-blend-mode">
+    </div>
+  </div>
+
+  <main
+    class="relative z-10 w-full max-w-screen-2xl mx-auto px-6 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-16 min-h-screen items-center">
+
+    <!-- Left Column: The Card Display -->
+    <div class="lg:col-span-5 relative perspective-1000 group w-full flex flex-col items-center justify-center">
+      <!-- Glow behind card -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-600/30 via-teal-400/20 to-purple-600/30 blur-[80px] opacity-40 group-hover:opacity-70 transition-opacity duration-1000 rounded-full pointer-events-none">
+      </div>
+
+      <!-- The Card -->
+      <div id="tilt-card"
+        class="card-container relative w-full max-w-sm xl:max-w-md mx-auto aspect-[2.5/3.5] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden chrome-border transform-style-3d bg-black group-hover:shadow-[0_0_60px_rgba(0,255,170,0.2)]">
+
+        <!-- Primary Image -->
+        <img src="./cards/ken-griffey-jr-1999-topps-chrome-refractor-224-front.jpg"
+          class="absolute inset-0 w-full h-full object-cover filter contrast-125 saturate-110"
+          alt="Ken Griffey Jr Swing" />
+
+        <!-- Refractor Texture Overlay -->
+        <div class="absolute inset-0 bg-[url('/images/griffey-refractor-holo-texture.png')] bg-cover opacity-50 mix-blend-hard-light"></div>
+        <!-- CSS Holographic overlay -->
+        <div class="absolute inset-0 holo-overlay"></div>
+
+        <!-- Glare sweep -->
+        <div class="glare"></div>
+
+        <!-- Card UI Overlays -->
+        <div class="absolute bottom-5 left-5 right-5 flex justify-between items-end z-20">
+          <div class="font-headline text-5xl uppercase leading-none text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            Ken <br> <span class="text-prismatic text-6xl tracking-tight">Griffey Jr.</span>
+          </div>
+          <div class="font-serif-display text-2xl text-yellow-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            1999
+          </div>
+        </div>
+        <!-- Topps Chrome Logo Mock -->
+        <div
+          class="absolute top-5 left-5 border border-white/40 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] text-white/90 z-20 rounded-sm shadow-lg">
+          Topps Chrome
+        </div>
+      </div>
+
+      <!-- Caption/Subtext under card -->
+      <div
+        class="text-center mt-8 text-xs text-slate-500 uppercase tracking-[0.25em] flex items-center justify-center gap-4">
+        <span class="w-8 h-[1px] bg-slate-700"></span>
+        Fig 1. — The 1999 Refractor
+        <span class="w-8 h-[1px] bg-slate-700"></span>
+      </div>
+    </div>
+
+    <!-- Right Column: The Story & Investment -->
+    <div class="lg:col-span-7 flex flex-col space-y-12 lg:pl-8">
+
+      <!-- Header -->
+      <header>
+        <h1
+          class="font-headline text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.85] uppercase text-white mb-6 tracking-tight">
+          The Sweetest Swing of the ‘90s, <br>
+          <span class="text-prismatic block mt-3 pb-2">Immortalized in Prismatic Light.</span>
+        </h1>
+        <div class="h-[2px] w-32 bg-gradient-to-r from-teal-400 via-blue-500 to-transparent"></div>
+      </header>
+
+      <!-- The Story -->
+      <article class="prose prose-invert prose-lg text-slate-300 font-light leading-relaxed max-w-2xl">
+        <p class="text-2xl text-white font-medium mb-6 font-headline tracking-wide">Before launch angles and analytics,
+          there was just "The Kid."</p>
+        <p class="mb-4">In 1999, baseball was a game of giants, but Ken Griffey Jr. stood alone—the undisputed King of
+          Seattle and the American League Home Run Leader. This 1999 Topps Chrome Refractor (#224) doesn’t just show
+          Griffey; it captures the exact essence of why we fell in love with baseball in the first place.</p>
+        <p class="mb-4">Frozen mid-follow-through—the most beautiful, effortless swing in the history of the
+          sport—Griffey is immortalized on one of the most sought-after card technologies of the decade. When the light
+          hits this Near-Mint refractor, the surface explodes into a mesmerizing, prismatic rainbow. It is a visual
+          masterpiece from the absolute peak of the ‘90s Chrome era.</p>
+        <p>Finding late-90s refractors with a surface this clean and edges this sharp is becoming incredibly rare. This
+          isn't just an insert; it’s a portal back to 1999, a tribute to the purest player of his generation, and a
+          dazzling centerpiece for any serious showcase.</p>
+      </article>
+
+      <!-- The Investment Spec Sheet -->
+      <div
+        class="relative overflow-hidden rounded-xl border border-white/10 bg-black/40 backdrop-blur-xl p-8 lg:p-10 group max-w-3xl shadow-2xl">
+        <!-- Background element for spec sheet -->
+        <div
+          class="absolute inset-0 bg-[url('/images/ref-1.jpg')] bg-cover bg-center opacity-10 mix-blend-luminosity transform scale-110 group-hover:scale-100 transition-transform duration-1000 ease-out">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-teal-900/10 mix-blend-overlay"></div>
+
+        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="border-l border-teal-500/30 pl-4">
+            <h3 class="text-[10px] uppercase tracking-[0.2em] text-teal-400 mb-2 font-bold">Player</h3>
+            <p class="font-headline text-3xl text-white leading-none tracking-wide">Ken Griffey Jr.</p>
+            <p class="text-xs text-slate-400 mt-2 uppercase tracking-wider">1999 AL Home Run Leader</p>
+          </div>
+          <div class="border-l border-teal-500/30 pl-4">
+            <h3 class="text-[10px] uppercase tracking-[0.2em] text-teal-400 mb-2 font-bold">Set</h3>
+            <p class="font-headline text-3xl text-white leading-none tracking-wide">1999 Topps Chrome</p>
+            <p class="text-xs text-slate-400 mt-2 uppercase tracking-wider">Refractor - League Leaders (#224)</p>
+          </div>
+          <div class="border-l border-teal-500/30 pl-4">
+            <h3 class="text-[10px] uppercase tracking-[0.2em] text-teal-400 mb-2 font-bold">Condition</h3>
+            <p class="font-headline text-3xl text-white leading-none tracking-wide">Near Mint</p>
+            <p class="text-xs text-slate-400 mt-2 uppercase tracking-wider">Pristine surface refraction, sharp corners
+            </p>
+          </div>
+          <div
+            class="border-l border-teal-500/30 pl-4 bg-gradient-to-r from-teal-500/10 to-transparent -ml-4 pl-8 py-2">
+            <h3 class="text-[10px] uppercase tracking-[0.2em] text-teal-400 mb-2 font-bold">Investment</h3>
+            <p class="font-headline text-5xl text-prismatic leading-none">$110</p>
+            <p class="text-xs text-slate-400 mt-2 uppercase tracking-wider">Matches current market average</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="pt-4">
+        <button
+          class="relative inline-flex items-center justify-center px-12 py-5 overflow-hidden font-headline text-2xl tracking-widest text-white bg-black border border-white/20 rounded-none group hover:border-teal-400 transition-all duration-300 w-full sm:w-auto">
+          <span
+            class="absolute w-0 h-0 transition-all duration-700 ease-out bg-gradient-to-r from-teal-500 via-blue-600 to-purple-600 rounded-none group-hover:w-full group-hover:h-full opacity-80"></span>
+          <span
+            class="absolute inset-0 w-full h-full opacity-20 bg-[url('/images/griffey-refractor-holo-texture.png')] bg-cover mix-blend-screen group-hover:opacity-60 transition-opacity duration-500"></span>
+          <span class="relative flex items-center gap-4 z-10">
+            [ Claim Your Piece of '90s History ]
+            <svg class="w-6 h-6 transform group-hover:translate-x-3 transition-transform duration-300" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+              </path>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Interactive 3D Card Script -->
+  <script>
+    const card = document.getElementById('tilt-card');
+
+    document.addEventListener('mousemove', (e) => {
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Max rotation is 15 degrees
+      const rotateX = ((y - centerY) / centerY) * -15;
+      const rotateY = ((x - centerX) / centerX) * 15;
+
+      // Distance from center of card to cursor
+      const cardCenterX = rect.left + centerX;
+      const cardCenterY = rect.top + centerY;
+      const dist = Math.sqrt(Math.pow(e.clientX - cardCenterX, 2) + Math.pow(e.clientY - cardCenterY, 2));
+
+      // Apply effect if within an interactive radius
+      if (dist < 600) {
+        // Dampen the effect based on distance
+        const intensity = Math.max(0, 1 - (dist / 600));
+        card.style.transform = `rotateX(${rotateX * intensity}deg) rotateY(${rotateY * intensity}deg) scale3d(${1 + (0.05 * intensity)}, ${1 + (0.05 * intensity)}, ${1 + (0.05 * intensity)})`;
+      } else {
+        card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      if (card) card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    });
+  </script>
+</body>
+
+</html>

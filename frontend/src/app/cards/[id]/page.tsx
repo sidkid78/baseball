@@ -335,6 +335,105 @@ export default async function CardDetailsPage(
               </a>
             )}
 
+            {/* ── STORY LINK (Griffey 1995 only) ───────────────────────── */}
+            {card.id === 'ken-griffey-jr-1995-pinnacle-museum-collection-128' && (
+              <a
+                href="/ken-griffey.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl overflow-hidden border border-[rgba(0,128,128,0.3)] bg-[#111009] hover:border-[rgba(0,128,128,0.6)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,128,128,0.12)]"
+              >
+                <div className="relative flex items-center gap-5 px-5 py-4">
+                  {/* Teal left accent bar */}
+                  <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#008080] to-transparent" />
+
+                  {/* Icon */}
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[rgba(0,128,128,0.1)] border border-[rgba(0,128,128,0.25)] flex items-center justify-center text-lg group-hover:bg-[rgba(0,128,128,0.2)] transition-colors">
+                    📖
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-[#7a6e58] mb-0.5">
+                      Collector&apos;s Story
+                    </p>
+                    <p className="text-sm font-semibold text-[#e0d9c4] leading-snug group-hover:text-[#008080] transition-colors">
+                      The Kid, The Bubble, and The 1995 Summer of Swagger.
+                    </p>
+                    <p className="text-xs text-[#5a5040] mt-0.5 truncate">
+                      Read the cinematic story behind this card →
+                    </p>
+                  </div>
+                </div>
+              </a>
+            )}
+
+            {/* ── STORY LINK (Griffey 1999 MVP Gold Script only) ───────────────────────── */}
+            {card.id === 'ken-griffey-jr-1999-upper-deck-mvp-gold-script-190' && (
+              <a
+                href="/ken-griffey-2.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl overflow-hidden border border-[rgba(212,175,55,0.3)] bg-[#111009] hover:border-[rgba(212,175,55,0.6)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(212,175,55,0.12)]"
+              >
+                <div className="relative flex items-center gap-5 px-5 py-4">
+                  {/* Gold left accent bar */}
+                  <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#d4af37] to-transparent" />
+
+                  {/* Icon */}
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.25)] flex items-center justify-center text-lg group-hover:bg-[rgba(212,175,55,0.2)] transition-colors">
+                    📖
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-[#7a6e58] mb-0.5">
+                      Collector&apos;s Story
+                    </p>
+                    <p className="text-sm font-semibold text-[#e0d9c4] leading-snug group-hover:text-[#d4af37] transition-colors">
+                      You can still see the swing, can&apos;t you?
+                    </p>
+                    <p className="text-xs text-[#5a5040] mt-0.5 truncate">
+                      Read the cinematic story behind this card →
+                    </p>
+                  </div>
+                </div>
+              </a>
+            )}
+
+            {/* ── STORY LINK (Griffey 1999 Topps Chrome Refractor only) ─────────────────── */}
+            {card.id === 'ken-griffey-jr-1999-topps-chrome-refractor-224' && (
+              <a
+                href="/ken-griffey-refactor.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl overflow-hidden border border-[rgba(20,184,166,0.3)] bg-[#111009] hover:border-[rgba(20,184,166,0.6)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(20,184,166,0.12)]"
+              >
+                <div className="relative flex items-center gap-5 px-5 py-4">
+                  {/* Teal/chrome left accent bar */}
+                  <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#14b8a6] to-transparent" />
+
+                  {/* Icon */}
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[rgba(20,184,166,0.1)] border border-[rgba(20,184,166,0.25)] flex items-center justify-center text-lg group-hover:bg-[rgba(20,184,166,0.2)] transition-colors">
+                    📖
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-[#7a6e58] mb-0.5">
+                      Collector&apos;s Story
+                    </p>
+                    <p className="text-sm font-semibold text-[#e0d9c4] leading-snug group-hover:text-[#14b8a6] transition-colors">
+                      Before launch angles, there was just The Kid.
+                    </p>
+                    <p className="text-xs text-[#5a5040] mt-0.5 truncate">
+                      Read the cinematic story behind this card →
+                    </p>
+                  </div>
+                </div>
+              </a>
+            )}
+
             {/* Specs section */}
             <div className="rounded-xl border border-[rgba(201,168,76,0.15)] bg-[#111009] overflow-hidden">
               <div className="px-5 py-3 border-b border-[rgba(201,168,76,0.1)] bg-[rgba(201,168,76,0.03)]">
